@@ -198,7 +198,7 @@ button{font:inherit;color:inherit}
     </div>
     <h2>WhatsApp number the button opens</h2>
     <label class="pfield">With country code<input id="waNum" inputmode="tel" autocomplete="off" placeholder="e.g. 9198XXXXXXXX"></label>
-    <p class="note">Put CarWale's WhatsApp business number here, or your own number to land in "Message yourself". Left empty, the button asks for a number first. Kept on this phone only. You can also add ?wa=91XXXXXXXXXX to the page link.</p>
+    <p class="note">Opens CarWale's WhatsApp (+91 96199 00008) by default. Change it to your own number to land in "Message yourself". Kept on this phone only. You can also add ?wa=91XXXXXXXXXX to the page link.</p>
     <h2>Events</h2>
     <ul class="log" id="log"><li class="empty">Nothing yet.</li></ul>
     <p class="note">The WhatsApp screens are a look-alike. Swift Mumbai prices are from carwale.com (23 Nov 2026): the LXi breakup is exact, other ex-showroom prices are rounded to Rs. 1,000. Dealer names are from the same page. Without a model, uploads use a sample Swift ZXi reading.</p>
@@ -2169,6 +2169,8 @@ Never use: should, must, guarantee, guaranteed, scam, cheat, rip-off, overcharge
   const numEl = $('#waNum');
   try { numEl.value = localStorage.getItem('bsmpWaNum') || ''; } catch (e) { /* storage unavailable */ }
   try { const qn = new URLSearchParams(location.search).get('wa'); if (qn) { numEl.value = qn; localStorage.setItem('bsmpWaNum', qn); } } catch (e) { /* no query or storage */ }
+  const DEFAULT_WA = '919619900008'; // CarWale WhatsApp number for this prototype
+  if (!numEl.value.trim()) numEl.value = DEFAULT_WA;
   function askNumber(source) {
     const back = document.createElement('div'); back.className = 'pq-back';
     back.innerHTML = '<div class="pq" role="dialog" aria-modal="true" aria-label="Which WhatsApp chat should this open?"><b>Which WhatsApp chat should this open?</b>'
