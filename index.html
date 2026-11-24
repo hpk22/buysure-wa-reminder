@@ -175,6 +175,75 @@ button{font:inherit;color:inherit}
   .panel-close{display:block;position:absolute;top:10px;right:10px;border:0;background:none;padding:8px;cursor:pointer;color:var(--hint)}
   .fab{display:block;position:fixed;right:10px;bottom:calc(env(safe-area-inset-bottom,0px) + 150px);z-index:90;border:0;background:var(--proto);color:#FFFFFF;font-weight:700;font-size:12px;padding:8px 11px;border-radius:999px;box-shadow:0 4px 12px rgba(0,0,0,.25);cursor:pointer;opacity:.92}
 }
+/* PIC quote check popup (PRD: MarketPrice quote check on the PIC page) */
+.widget-wrap .bsmp-or,.widget-wrap .bsmp-price,.widget-wrap .bsmp-hint,.widget-wrap .bsmp-mocknote{display:none}
+.pc{position:absolute;inset:0;z-index:70;display:flex;flex-direction:column;background:var(--bs-bg);color:var(--bs-text);animation:pc-in .2s ease-out}
+@keyframes pc-in{from{transform:translateY(16px);opacity:.6}}
+@media (prefers-reduced-motion: reduce){.pc{animation:none}}
+.pc>.bsmp-page{flex:1;min-height:0}
+.pc-head{flex:none}
+.pc-body{flex:1;min-height:0;overflow-y:auto;overscroll-behavior:contain;padding:14px 16px 20px}
+.pc .bsmp-foot{flex:none}
+.pc-thumb{flex:none;width:56px;height:72px;border-radius:8px;border:1px solid var(--bs-line);overflow:hidden;padding:0;background:var(--bs-sunk);cursor:zoom-in}
+.pc-thumb img{width:100%;height:100%;object-fit:cover;display:block}
+.pc-thumb.big{width:120px;height:156px;margin:6px auto 14px;display:block}
+.pc-thumb.ph{cursor:default}
+.pc-analyse{text-align:center;padding-top:12px}
+.pc-analyse h2{font-size:16px;color:var(--bs-ink);margin:0 0 6px}
+.pc-analyse .bsmp-steps{display:inline-block}
+.pc-analyse .bsmp-err{text-align:left}
+.pc-intro{display:flex;gap:12px;align-items:center;margin-bottom:14px}
+.pc-intro b{display:block;font-size:15px;color:var(--bs-ink);margin-bottom:2px}
+.pc-intro p{margin:0;font-size:13px;color:var(--bs-text2);line-height:1.45}
+.pc-prog{height:4px;border-radius:2px;background:var(--bs-line);overflow:hidden}
+.pc-prog i{display:block;height:100%;background:var(--bs-teal);transition:width .25s ease}
+.pc-count{font-size:12px;color:var(--bs-hint);margin:6px 0 10px}
+.pc-lead{font-size:13px;color:var(--bs-text2);margin:0 0 12px}
+.pc-card{border:1px solid var(--bs-line);border-radius:12px;padding:14px;background:var(--bs-bg)}
+.pc-card h2{font-size:15px;line-height:1.4;color:var(--bs-ink);margin:0 0 12px}
+.pc-opts{display:flex;flex-direction:column;gap:8px}
+.pc-opt{display:flex;align-items:center;gap:10px;width:100%;min-height:46px;padding:10px 12px;border:1px solid var(--bs-line2);border-radius:8px;background:var(--bs-bg);color:var(--bs-text);font:inherit;font-size:14px;text-align:left;cursor:pointer}
+.pc-opt[aria-checked="true"]{border:2px solid var(--bs-teal);padding:9px 11px;background:var(--bs-teal-soft)}
+.pc-dot{flex:none;width:20px;height:20px;border-radius:50%;border:2px solid var(--bs-line2);display:grid;place-items:center;color:#fff}
+.pc-dot.sq{border-radius:5px}
+.pc-opt[aria-checked="true"] .pc-dot{border-color:var(--bs-teal);background:var(--bs-teal)}
+.pc-dot svg{width:13px;height:13px}
+.pc-other{font:inherit;font-size:15px;padding:11px 12px;border:2px solid var(--bs-teal);border-radius:8px;background:var(--bs-bg);color:var(--bs-text);outline:0}
+.pc-amt{flex:none}
+.pc-skip{display:block;width:100%;margin-top:6px;min-height:42px;border:0;background:none;color:var(--bs-teal-d);font:inherit;font-weight:700;font-size:14px;cursor:pointer}
+.pc-car{display:flex;gap:12px;align-items:center;padding:10px 12px;border:1px solid var(--bs-line);border-radius:12px;margin-bottom:12px}
+.pc-car b{display:block;font-size:15px;color:var(--bs-ink);line-height:1.3}
+.pc-car span{display:block;font-size:13px;color:var(--bs-hint);margin-top:2px}
+.pc-car small{display:block;font-size:12px;margin-top:3px}
+.pc-needbox{border:1px solid var(--bs-line);background:var(--bs-sunk);border-radius:10px;padding:12px;margin-bottom:12px}
+.pc-needbox p{margin:0 0 10px;font-size:13px;color:var(--bs-text2);line-height:1.45}
+.pc-rows{border:1px solid var(--bs-line);border-radius:12px;padding:4px 12px}
+.pc-row{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:10px 0;font-size:13.5px;font-weight:700;border-top:1px solid var(--bs-line)}
+.pc-row:first-child{border-top:0}
+.pc-row>span:first-child{min-width:0}
+.pc-row small{display:block;font-size:11.5px;font-weight:400;margin-top:2px}
+.pc-row.total{font-size:15px;color:var(--bs-ink)}
+.pc-row.orange small,.pc-orange-t{color:#B45F06}
+.pc-row.orange .pc-num{border-color:#E8961E;background:#FFF7E6}
+.pc-row.need .pc-num{border-color:var(--bs-red)}
+.pc-num{width:136px;flex:none}
+.pc-num i{white-space:nowrap}
+.pc-verdict{text-align:center;color:var(--bs-ink);margin:4px 0 6px}
+.pc-gauge{width:210px;height:auto;display:block;margin:0 auto -18px}
+.pc-label{font-size:20px;font-weight:900;margin:0}
+.pc-note{border:1px solid var(--bs-line);border-radius:12px;padding:12px 14px;margin:14px 0}
+.pc-note h3{font-size:14px;color:var(--bs-ink);margin:0 0 4px}
+.pc-note p{margin:0 0 12px;font-size:14px;line-height:1.55;color:var(--bs-text)}
+.pc-note p:last-child{margin-bottom:0}
+.pc-note b{color:#B45F06}
+.pc-left{margin-bottom:12px}
+.pc-left .bsmp-btn{margin-top:10px}
+.pc-thanks{display:flex;gap:6px;align-items:center;font-size:13px;color:var(--bs-teal-d);margin:0 0 12px}
+.pc-full{position:absolute;inset:0;z-index:5;background:rgba(0,0,0,.92);overflow-y:auto;display:flex;flex-direction:column;align-items:center;gap:10px;padding:16px;cursor:zoom-out}
+.pc-full img{max-width:100%;height:auto;border-radius:4px}
+.pc-full p{color:#FFFFFF;font-size:13px;margin:4px 0 8px}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .pc-row.orange .pc-num{background:#352813}:root:not([data-theme="light"]) .pc-row.orange small,:root:not([data-theme="light"]) .pc-orange-t,:root:not([data-theme="light"]) .pc-note b{color:#F2B25C}:root:not([data-theme="light"]) .pc-skip,:root:not([data-theme="light"]) .pc-thanks{color:#5CC8BD}}
+:root[data-theme="dark"] .pc-row.orange .pc-num{background:#352813}:root[data-theme="dark"] .pc-row.orange small,:root[data-theme="dark"] .pc-orange-t,:root[data-theme="dark"] .pc-note b{color:#F2B25C}:root[data-theme="dark"] .pc-skip,:root[data-theme="dark"] .pc-thanks{color:#5CC8BD}
 </style>
 </head>
 <body>
@@ -185,9 +254,9 @@ button{font:inherit;color:inherit}
     <p class="sub">BuySure on the Swift Mumbai PIC page. The buyer taps the WhatsApp button, sends a prefilled message, and picks 3 or 7 days inside WhatsApp.</p>
     <h2>Try it</h2>
     <ol>
-      <li>Tap <b>No quote yet? Get a reminder on WhatsApp</b> under the upload box. (Or start an upload and press back: the same sheet opens.)</li>
-      <li>Your real WhatsApp opens with the message typed. Tap Send there.</li>
-      <li>To see what the bot would reply and the day 3 / day 7 reminders, use <b>Preview reminder chat</b> below.</li>
+      <li>Tap <b>Upload Dealer Price Quote</b> on the PIC page: the quote check opens full screen (read, up to 5 questions, breakup, Compare, a few skippable questions, result). Close it any time to land back where you were.</li>
+      <li>No quote yet? Tap <b>Get a reminder on WhatsApp</b>: your real WhatsApp opens with the message typed.</li>
+      <li><b>Preview reminder chat</b> shows the bot's replies and reminders. Send a quote photo there with the clip, or tap <b>Upload on CarWale</b> in a reminder: both open the same quote check.</li>
     </ol>
     <h2>Jump to</h2>
     <div class="pbtns">
@@ -199,9 +268,13 @@ button{font:inherit;color:inherit}
     <h2>WhatsApp number the button opens</h2>
     <label class="pfield">With country code<input id="waNum" inputmode="tel" autocomplete="off" placeholder="e.g. 9198XXXXXXXX"></label>
     <p class="note">Opens CarWale's WhatsApp (+91 96199 00008) by default. Change it to your own number to land in "Message yourself". Kept on this phone only. You can also add ?wa=91XXXXXXXXXX to the page link.</p>
+    <h2>Quote reading outside claude.ai</h2>
+    <label class="pfield">OpenRouter key<input id="orKey" type="password" autocomplete="off" placeholder="sk-or-..."></label>
+    <label class="pfield" style="margin-top:8px">Model<input id="orModel" autocomplete="off" spellcheck="false"></label>
+    <p class="note">On the claude.ai link, quotes are read with Claude. On GitHub Pages, add your OpenRouter key; it's kept on this phone only. The PRD's model is Gemini 3.8 Flash with low thinking; check the exact model id on OpenRouter.</p>
     <h2>Events</h2>
     <ul class="log" id="log"><li class="empty">Nothing yet.</li></ul>
-    <p class="note">The WhatsApp screens are a look-alike. Swift Mumbai prices are from carwale.com (23 Nov 2026): the LXi breakup is exact, other ex-showroom prices are rounded to Rs. 1,000. Dealer names are from the same page. Without a model, uploads use a sample Swift ZXi reading.</p>
+    <p class="note">The WhatsApp screens are a look-alike. Swift Mumbai prices are from carwale.com (23 Nov 2026): the LXi breakup is exact, other ex-showroom prices are rounded to Rs. 1,000. Dealer names are from the same page. The quote check follows "PRD: MarketPrice quote check on the PIC page" with its PIC extractor prompt and verdict prompt v3; the event log shows the stored record's status and trust score at each step.</p>
   </aside>
 
   <main class="stage">
@@ -234,7 +307,7 @@ button{font:inherit;color:inherit}
                 </dl>
               </div>
             </div>
-            <div class="wa-notice" id="waNotice" hidden role="status"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="11" fill="#25D366"/><path fill="#fff" d="M16.6 14.2c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1-.2.2-.6.8-.8 1-.1.2-.3.2-.5.1-.7-.3-1.6-.8-2.4-1.6-.6-.6-1.1-1.3-1.2-1.6-.1-.2 0-.4.1-.5l.4-.5c.1-.2.2-.3.3-.5.1-.2 0-.4 0-.5l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5c-.2 0-.5.1-.7.3-.2.3-.9.9-.9 2.2s.9 2.5 1.1 2.7c.1.2 1.8 2.8 4.4 3.9 2.2.9 2.6.7 3.1.7s1.5-.6 1.7-1.2c.2-.6.2-1.1.1-1.2 0-.1-.2-.2-.4-.3z"/></svg><div><b id="waNoticeTitle">WhatsApp opened</b><span id="waNoticeText">Tap Send in WhatsApp to get your reminder. You'll pick 3 or 7 days there.</span><br><a id="waAgain" target="_blank" rel="noopener">Open WhatsApp again</a></div></div>
+            <div class="wa-notice" id="waNotice" hidden role="status"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="11" fill="#25D366"/><path fill="#fff" d="M16.6 14.2c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1-.2.2-.6.8-.8 1-.1.2-.3.2-.5.1-.7-.3-1.6-.8-2.4-1.6-.6-.6-1.1-1.3-1.2-1.6-.1-.2 0-.4.1-.5l.4-.5c.1-.2.2-.3.3-.5.1-.2 0-.4 0-.5l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5c-.2 0-.5.1-.7.3-.2.3-.9.9-.9 2.2s.9 2.5 1.1 2.7c.1.2 1.8 2.8 4.4 3.9 2.2.9 2.6.7 3.1.7s1.5-.6 1.7-1.2c.2-.6.2-1.1.1-1.2 0-.1-.2-.2-.4-.3z"/></svg><div><b id="waNoticeTitle">WhatsApp opened</b><span id="waNoticeText">Tap Send in WhatsApp and we'll remind you in 3 days.</span><br><a id="waAgain" target="_blank" rel="noopener">Open WhatsApp again</a></div></div>
             <div class="widget-wrap" id="widgetWrap"><div id="bsmpRoot"></div></div>
             <div class="pic pic-rest">
               <h2>Other Swift variants</h2>
@@ -1926,27 +1999,22 @@ Never use: should, must, guarantee, guaranteed, scam, cheat, rip-off, overcharge
   cat.dealers['maruti suzuki|mumbai'] = [{ name: 'Sai Service', area: 'Virar West' }, { name: 'Spectra Motors', area: 'Goregaon' }, { name: 'KTS Automotors', area: 'Fort' }];
   cat.note = 'Swift Mumbai prices from carwale.com (23 Nov 2026); LXi exact, others rounded. Offers from the same page. Segment rank is sample.';
 
-  // ---------- model: Claude in claude.ai, else a sample Swift reading ----------
-  const swiftMock = {
-    name: 'Mock (no model)', available: async () => true,
-    readQuote: async () => {
-      await new Promise(r => setTimeout(r, 900));
-      const v = cat.models.swift.versions.find(x => x.id === 'zxi-petrol-manual');
-      const ref = BS.refs(cat, 'swift', v.id, 'mumbai', {});
-      const items = { exShowroom: v.ex, rto: Math.round(ref.rto + 3500), tcs: ref.tcs || 0, insurance: Math.round(ref.insurance('bundle').ceiling * 1.1),
-        accessories: 18500, extendedWarranty: 9800, servicePlan: 0, handling: 0, others: 1500 };
-      const disc = 15000, total = Object.values(items).reduce((s, x) => s + x, 0) - disc;
-      return { isQuote: true, make: 'Maruti Suzuki', model: 'Swift', variant: v.name, fuel: 'petrol', cc: 1197, city: 'Mumbai', dealer: '', quoteDate: null,
-        items, insuranceAddons: ['zd', 'rsa'], discounts: { total: disc, manufacturer: null, dealer: null, exchangeBonus: 0, scrappageBonus: 0, corporate: 0, loyalty: 0 },
-        deductions: { bookingAmount: 0, oldCarExchangeValue: 0 }, total, confidence: 0.9, mock: true };
-    },
-    writeVerdict: async () => { throw { code: 'mock' }; }
-  };
+  // ---------- model: Claude on claude.ai; elsewhere OpenRouter with the key from the Prototype panel (no sample readings) ----------
+  const DEFAULT_OR_MODEL = 'google/gemini-3.8-flash';
   const claudeLlm = BS.llm.claude();
+  const orKeyEl = $('#orKey'), orModelEl = $('#orModel');
+  try { orKeyEl.value = localStorage.getItem('bsmpOrKey') || ''; orModelEl.value = localStorage.getItem('bsmpOrModel') || DEFAULT_OR_MODEL; } catch (e) { orModelEl.value = DEFAULT_OR_MODEL; }
   let pick = null;
-  const choose = async () => pick || (pick = (await claudeLlm.available().catch(() => false)) ? claudeLlm : swiftMock);
-  const llm = { get name() { return pick ? pick.name : 'detecting…'; }, available: async () => true, resolve: choose,
-    readQuote: async (i, p) => (await choose()).readQuote(i, p), writeVerdict: async (p, cb) => (await choose()).writeVerdict(p, cb) };
+  [orKeyEl, orModelEl].forEach(el => el.addEventListener('change', () => { try { localStorage.setItem(el === orKeyEl ? 'bsmpOrKey' : 'bsmpOrModel', el.value.trim()); } catch (e) { /* storage unavailable */ } if (pick !== claudeLlm) pick = null; }));
+  const choose = async () => {
+    if (pick) return pick;
+    if (await claudeLlm.available().catch(() => false)) return (pick = claudeLlm);
+    const key = orKeyEl.value.trim();
+    return key ? (pick = BS.llm.openRouter({ key, model: orModelEl.value.trim() || DEFAULT_OR_MODEL, effort: 'low', readTokens: 8000, verdictTokens: 1500 })) : null;
+  };
+  const llm = { get name() { return pick ? pick.name : 'none'; }, available: async () => !!(await choose()), resolve: choose,
+    readQuote: async (i, p) => { const m = await choose(); if (!m) throw { code: 'no_model' }; return m.readQuote(i, p); },
+    writeVerdict: async (p, cb) => { const m = await choose(); if (!m) throw { code: 'no_model' }; return m.writeVerdict(p, cb); } };
 
   // ---------- event log ----------
   const logEl = $('#log');
@@ -2055,10 +2123,10 @@ Never use: should, must, guarantee, guaranteed, scam, cheat, rip-off, overcharge
   });
   text.addEventListener('keydown', e => { if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); sendBtn.click(); } });
 
-  function askDays() {
-    return botSay('Sure. When should we remind you to check your ' + esc(ctx.model) + ' quote?\n\nYou can also send a photo of the quote here any time.', {
-      buttons: [{ label: 'In 3 days', run: () => chooseDays(3) }, { label: 'In 7 days', run: () => chooseDays(7) }]
-    });
+  function askDays() { // no days question: fixed schedule, first reminder on day 3, last on day 7
+    wa.plan = [3, 7];
+    log('reminder_set', 'day 3, then day 7');
+    return botSay('Done. We\'ll remind you on ' + dayLabel(3) + ' to check your ' + esc(ctx.model) + ' quote.\n\nGot the quote already? Send a photo of it here any time.', { foot: 'Reply STOP any time to stop reminders.', buttons: [backBtn()] }).then(protoNext);
   }
   function chooseDays(n) {
     msg('me', 'In ' + n + ' days');
@@ -2142,7 +2210,7 @@ Never use: should, must, guarantee, guaranteed, scam, cheat, rip-off, overcharge
       buttons: [{ label: 'See my result', url: true, run: () => {
         log('reminder_click', 'chat photo');
         showCw(); setUrl('www.carwale.com/buyers/marketprice/upload?utm_source=whatsapp&utm_medium=chat_upload&ref=' + ref, true);
-        app.start({ method: 'upload', file: f });
+        openCheck(f, { source: 'whatsapp' });
       } }]
     }, 1100);
   });
@@ -2168,9 +2236,8 @@ Never use: should, must, guarantee, guaranteed, scam, cheat, rip-off, overcharge
   function ensurePlan() {
     if (!wa.optedIn) { msg('me', esc(optinText())); wa.optedIn = true; log('optin_sent', ref + ' (jumped)'); setComposer(''); }
     if (!wa.plan) {
-      msg('bot', 'Sure. When should we remind you to check your ' + esc(ctx.model) + ' quote?\n\nYou can also send a photo of the quote here any time.');
-      msg('me', 'In 3 days'); wa.plan = [3, 7];
-      msg('bot', 'Done. We\'ll remind you on ' + dayLabel(3) + '.', { foot: 'Reply STOP any time to stop reminders.', buttons: [backBtn()] });
+      wa.plan = [3, 7];
+      msg('bot', 'Done. We\'ll remind you on ' + dayLabel(3) + ' to check your ' + esc(ctx.model) + ' quote.\n\nGot the quote already? Send a photo of it here any time.', { foot: 'Reply STOP any time to stop reminders.', buttons: [backBtn()] });
     }
   }
   panel.addEventListener('click', e => {
@@ -2221,7 +2288,7 @@ Never use: should, must, guarantee, guaranteed, scam, cheat, rip-off, overcharge
     if (win) { try { win.opener = null; } catch (e) { /* cross-origin */ } }
     const n = $('#waNotice'), again = $('#waAgain');
     again.href = url; again.hidden = false;
-    $('#waNoticeText').textContent = 'Tap Send in WhatsApp to get your reminder. You\u2019ll pick 3 or 7 days there.';
+    $('#waNoticeText').textContent = 'Tap Send in WhatsApp and we\u2019ll remind you in 3 days.';
     $('#waNoticeTitle').textContent = win ? 'WhatsApp opened' : 'Open WhatsApp to set your reminder';
     again.textContent = win ? 'Open WhatsApp again' : 'Open WhatsApp';
     n.hidden = false;
@@ -2229,6 +2296,518 @@ Never use: should, must, guarantee, guaranteed, scam, cheat, rip-off, overcharge
     requestAnimationFrame(() => { scroller.scrollTop = Math.max(0, n.offsetTop - 8); });
   }
   $('#waAgain').addEventListener('click', () => log('whatsapp_redirect', 'again'));
+
+  // ===================== MarketPrice quote check on the PIC page (PRD, 23 Nov 2026) =====================
+  // Full-screen popup over the PIC page: upload -> analysing -> set 1 (mandatory, max 5) -> breakup -> Compare -> set 2 (skippable) -> verdict.
+  BS.tables.signalBands.good = 1.75; // Good band widened to +1.75%
+  const EXTRACT_PROMPT = "You read Indian new-car dealer quotes for CarWale's MarketPrice: printed proformas, WhatsApp screenshots, photos and handwritten notes. Dealers often write a printed price, then cut it by hand in one or more rounds.\n\nThe buyer opened this from the price page of one car. You check only that car.\n\nYOUR GOAL\nWork out exactly what this buyer is getting and paying for {{PAGE_MAKE}} {{PAGE_MODEL}}:\n1. Which variant of {{PAGE_MODEL}} each quote on the sheet is for.\n2. The final price the dealer promised.\n3. Every number on the sheet: what it is, whether it is in the final price, and whether the item is paid, free, removed or discounted.\n4. Whether this is an opening quote or a negotiated one.\nGive a confidence from 0 to 1 for each. Write a short question for the buyer only where you are unsure. Never ignore a number.\n\nCONTEXT FROM THE APP\n- Car: {{PAGE_MAKE}} {{PAGE_MODEL}}. This is fixed. Never read or check any other model.\n- Variant selected on the page (may be empty): {{PAGE_VARIANT}}. A hint only: if the quote shows another variant of {{PAGE_MODEL}}, trust the quote.\n- City: {{PAGE_CITY}}. This is fixed. Never change it.\n- Variants of {{PAGE_MODEL}} in {{PAGE_CITY}} (versionId, name, fuel, transmission, exShowroom, onRoad): {{VARIANT_LIST}}\n- This month's offers on {{PAGE_MODEL}} in {{PAGE_CITY}} (kind, amount). May be empty: {{OFFERS}}\n- Today: {{TODAY}}\n- Limits: at most {{MAX_QUESTIONS}} questions in total, at most {{MAX_OPTIONS}} options per question.\n\nSTEP 1: WHAT IS THIS DOCUMENT\n- \"dealer_quote\": a price quote for one buyer, printed, typed, screenshot or handwritten.\n- \"price_list\": a dealer's list of many variants or models, not for one buyer.\n- \"car_site\": a screenshot of CarWale or another car website's price page.\n- \"not_quote\": anything else (ID cards, bank or loan papers, EMI schedules, selfies, car photos).\nIf it is not a dealer_quote, return documentType, notQuoteReason and options as [] only.\n\nSTEP 2: WHICH CAR, AND HOW MANY QUOTES\n- Find every car on the sheet. A car that is not {{PAGE_MODEL}} goes only in otherModels, by name as written. Read none of its numbers and never mix its lines with {{PAGE_MODEL}}.\n- If the sheet prices two or more variants of {{PAGE_MODEL}} side by side, each is one option. Read the first 2 options in full and never mix their lines. For any more, return only optionId, label and finalPrice.\n- Revisions of the same quote (a printed total with handwritten cuts below it) are ONE option with several final price candidates, not separate options.\n- modelMatch: \"exact\" when the quote names {{PAGE_MODEL}}. When the quote names no model, the name can't be read, or it names only other models: take the one set of values whose ex-showroom (or on-road, if there is no ex-showroom) is closest to a variant in VARIANT_LIST, read it as the only option, and set modelMatch \"by_price\". If no set is within 10% of any listed variant, set modelMatch \"none\" and return options as [].\n\nSTEP 3: READ EVERY NUMBER (for each option)\nList every amount in components, in the order written, including subtotals, totals, discounts and lines in the margin.\nNumber rules:\n- Amounts are whole rupees. \"/-\" after an amount is not a digit: \"5,715/-\" is 5715. \"9.40 L\" or \"9.40 lakh\" is 940000. A short handwritten \"940\" or \"8.13\" next to a lakh total means 940000 or 813000.\n- Check the sums before you trust a number. If a running subtotal drops between two lines, the line between them was taken off, even with no minus sign. If one amount makes a sum wrong by about 10 times, you have likely misread a digit: fix it and lower its confidence.\n- Numbers can be out of order, sideways, in the margin, circled, highlighted or crossed out. A crossed-out amount is an older figure: keep it, with status \"not_in_final\".\n- A line written after or outside the final total (for example \"Ex-warranty + CCP -> 14,985\" below the on-road) is an optional extra, not part of the price: status \"not_in_final\".\nWhere each line goes in items (amounts the buyer pays in the final price):\n- exShowroom: ex-showroom, car cost, \"Car cur.\", basic price. If ex-showroom is shown before and after a discount, exShowroom is the first figure and the difference is a discount with appliedTo \"exShowroom\".\n- rto: road tax, life tax, registration (RC, Regn, LT), hypothecation (HP, Hypo) of about 1,500 or less, smart card, HSRP plate fee.\n- tcs: TCS.\n- insurance: insurance as printed, before any insurance discount. insuranceAddons: \"zd\" (ZD, zero or nil depreciation), \"rti\", \"rsa\", \"eng\" (engine protect), \"cons\" (consumables).\n- accessories: accessories, basic kit, HSRP frame, coatings (ceramic, teflon), anti-rust and other add-on products. marginGroup: \"high\" for coatings, anti-rust and dealer packs; \"medium\" for genuine accessories and basic kits; \"low\" for an HSRP frame.\n- extendedWarranty: EW, extended warranty. servicePlan: MSP, CCP, AMC, service package. handling: handling, logistics, PDI.\n- others: FASTag (FT), reward or auto card (885 on every Maruti Suzuki), documentation, T.R, dealer service charges, and any line that bundles hypothecation with service charges (\"HP.T/R & Service charges 5,703\").\nShort forms you know and never ask about: FT, HSRP, TCS, RC, Regn, LT, HP, Hypo, T.R, Smart card, Reward card, Auto card, Ins, Ex-sh, Car cost, EW, MSP, CCP, AMC, Acc, Disc, Exch, Corp, CPC, ZD. Notes in brackets such as (15 yr) or (OD 1Y + TP 3Y) are details: read them, never ask.\nStatus of each component:\n- \"paid\": in the final price at its amount.\n- \"free\": the quote says free, FOC or complimentary.\n- \"removed\": the quote says the buyer dropped it.\n- \"discounted\": part of its amount is taken off.\n- \"not_in_final\": crossed out, an older figure, or written outside the final total.\n- \"unknown\": taken off or added without saying why. \"Basic kit -21,000\" with no word like free is unknown: the dealer may be giving it free, or the buyer may have asked to remove it.\n\nSTEP 4: DISCOUNTS\nList each discount with its label as written, amount and kind: \"cash\", \"exchange\", \"corporate\", \"loyalty\", \"insurance\" (\"less ins\", \"Ins offer\"), \"scrappage\", \"accessories\" (free or cheaper accessories), \"dealer\", or \"unknown\" when the label doesn't say what it is (\"Discount\", \"Scheme\", \"Additional offer\", \"Less\", \"Consumer offer\").\ninsuranceDiscount is the insurance part, also listed in discounts.\nA booking amount or old car value taken off to reach the total goes in deductions, not discounts.\n\nSTEP 5: THE FINAL PRICE\nPut every amount that could be the final price in finalPriceCandidates, with where it is. Never assume the largest, printed or highlighted number is final. A handwritten amount below or beside a printed total is usually a later, negotiated price. Set finalPrice to your best pick. If only one amount fits and the lines add up to it, give it high confidence.\n\nSTEP 6: VARIANT AND CITY\n- Pick the variant only from VARIANT_LIST. Ex-showroom within 2,000 of one listed variant and the name words agree: 0.9 or more. Name agrees but the quote has no ex-showroom (on-road only): at most 0.6, since there is no second check. Two variants fit (for example MT and AMT of the same trim): put both in variantCandidates and stay below 0.8. modelMatch \"by_price\": at most 0.6.\n- variantCandidates: the 2 or 3 closest variants from the list.\n- printedCity: only from the dealer's address or a printed city. Ignore bank, financier and head office addresses. If neither, null.\n- cityMatchesPage: true if printedCity is {{PAGE_CITY}}, false if it is clearly another city, null if printedCity is null.\n\nSTEP 7: DEAL STAGE (read it, never ask it)\n- \"opening\": a printed quote with no discount anywhere.\n- \"negotiated\": handwritten cuts, more than one total, or discounts written by hand.\n- \"final\": the quote says final, net or best price, or a booking is recorded.\n- \"unknown\": you cannot tell.\n\nSTEP 8: CONFIDENCE\nfieldConfidence from 0 to 1 for variant, city (the printed city reading), finalPrice, dealStage, breakup, discounts, dealer and quoteDate. Each component also gets one.\n- 0.9 to 1: printed clearly and the sums agree.\n- 0.8: clear, but not cross-checked.\n- 0.5 to 0.7: likely, but another reading is possible.\n- Below 0.5: a guess.\nAn on-road-only quote with no breakup gets breakup 0.2 or less.\n\nSTEP 9: QUESTIONS FOR THE BUYER\nWrite a question only for a field or component below 0.8. At most {{MAX_QUESTIONS}} in total, in step order, one per field or component.\nThe buyer must answer every question and cannot skip, so every question ends with the option \"Not sure\" (value not_sure). Options per question, \"Not sure\" and \"Something else\" included: at most {{MAX_OPTIONS}}.\nSteps you write:\n- Step 2, variant. \"Is your Baleno Zeta a manual or an automatic?\" Options: the variantCandidates (value = versionId), then Not sure. allowOther true.\n- Step 4, final price. \"Which amount did the dealer finally promise?\" Options: each candidate (value = amount), then Not sure. allowOther true.\n- Step 5, an item taken off or added with status unknown. \"The \u20b921,000 basic kit is taken off. Is the dealer giving it free, or did you ask to remove it?\" Values: free, removed, not_sure.\n  Step 5 also covers a number or charge you can't place. \"What is the \u20b925,000 on your quote for?\" Options: your 2 or 3 best guesses (value = field name), then Not sure. allowOther true. For a bundled or unclear charge: \"What does the \u20b95,703 for HP, T/R and service charges cover?\" Values: loan_or_registration_fees, dealer_service_charge, government_tax, not_sure.\n- Step 7, a discount of kind unknown and 500 or more. \"What was the \u20b97,473 additional offer for?\" card \"multi\". Values: cash, exchange, corporate, loyalty, insurance, accessories, dealer, not_sure. Put kinds found in OFFERS first.\nThe app writes step 1 (which variant, when there are 2 or more options), step 3 (city, when cityMatchesPage is false) and step 6 (registration far from usual). Do not write those.\nNever ask about: the model or the city; the deal stage or whether the dealer offered any other discount; whether insurance is included, or whether an exchange value or booking amount was taken off (all asked later, after Compare); a clearly labelled line (\"Additional cash discount 7,500\"); the short forms above; FASTag, HSRP, smart card, reward card, TCS under 2,500; notes in brackets; sums that add up.\nWording: simple English for first-time buyers. At most 20 words. Name the exact amount or line as written on the quote. Amounts as \u20b9 with Indian grouping (\u20b98,34,996). No \"Is this correct?\" questions.\ncard is one of \"single\", \"yesno\", \"multi\", \"amount\", \"text\". Each option has a short label for the buyer and a value from the lists above.\n\nOUTPUT\nReturn ONLY this JSON object. No prose, no code fences. Use 0 for absent amounts and null for absent text. Never invent a value that is not on the document.\n{\n \"documentType\": \"dealer_quote|price_list|car_site|not_quote\",\n \"notQuoteReason\": null,\n \"readingConfidence\": 0.0,\n \"modelMatch\": \"exact|by_price|none\",\n \"otherModels\": [\"as written\"],\n \"options\": [{\n  \"optionId\": \"A\",\n  \"label\": \"as written, e.g. 1.2 Petrol Zeta MT\",\n  \"variantAsWritten\": \"\",\n  \"fuel\": \"petrol|diesel|cng|ev|hybrid|unknown\", \"transmission\": \"manual|automatic|unknown\",\n  \"variant\": {\"versionId\": null, \"name\": null},\n  \"variantCandidates\": [{\"versionId\": \"\", \"name\": \"\", \"exShowroom\": 0}],\n  \"printedCity\": null, \"cityMatchesPage\": null,\n  \"dealer\": {\"name\": null, \"address\": null},\n  \"quoteDate\": \"YYYY-MM-DD or null (quotes write DD/MM/YYYY)\",\n  \"items\": {\"exShowroom\": 0, \"rto\": 0, \"tcs\": 0, \"insurance\": 0, \"accessories\": 0, \"extendedWarranty\": 0, \"servicePlan\": 0, \"handling\": 0, \"others\": 0},\n  \"insuranceAddons\": [],\n  \"components\": [{\"id\": \"c1\", \"label\": \"as written\", \"amount\": 0, \"field\": \"exShowroom|rto|tcs|insurance|accessories|extendedWarranty|servicePlan|handling|others|discount|deduction|subtotal|total\", \"sign\": \"add|subtract|none\", \"status\": \"paid|free|removed|discounted|not_in_final|unknown\", \"marginGroup\": \"high|medium|low|null\", \"where\": \"printed|handwritten|margin|below_total\", \"confidence\": 0.0}],\n  \"discounts\": [{\"label\": \"\", \"amount\": 0, \"kind\": \"cash|exchange|corporate|loyalty|insurance|scrappage|accessories|dealer|unknown\", \"appliedTo\": \"exShowroom|insurance|accessories|total\", \"confidence\": 0.0}],\n  \"insuranceDiscount\": 0,\n  \"deductions\": {\"bookingAmount\": 0, \"oldCarExchangeValue\": 0},\n  \"finalPriceCandidates\": [{\"amount\": 0, \"where\": \"printed_total|handwritten_below|handwritten_margin|circled|net_after_cuts\", \"confidence\": 0.0}],\n  \"finalPrice\": 0,\n  \"dealStage\": \"opening|negotiated|final|unknown\",\n  \"unexplained\": [{\"label\": \"\", \"amount\": 0, \"note\": \"\"}],\n  \"fieldConfidence\": {\"variant\": 0.0, \"city\": 0.0, \"finalPrice\": 0.0, \"dealStage\": 0.0, \"breakup\": 0.0, \"discounts\": 0.0, \"dealer\": 0.0, \"quoteDate\": 0.0},\n  \"questions\": [{\"id\": \"q1\", \"step\": 2, \"field\": \"variant|finalPrice|component|discount\", \"componentId\": null, \"card\": \"single\", \"text\": \"\", \"options\": [{\"label\": \"\", \"value\": \"\"}], \"allowOther\": false}]\n }]\n}\n\nEXAMPLES (how to think; don't copy the amounts)\n1. Baleno page. Baleno Zeta, no ex-showroom: on-road 9,96,000, basic kit 21,000, warranty 18,000, insurance 10,000, additional offer 7,473, final 9,40,000. The subtotal drops after the warranty line, so the warranty was taken off too. Variant 0.6 (on-road only): ask Zeta MT or AMT. Basic kit and warranty: status unknown, ask free or removed for each. Additional offer: kind unknown, ask what it was for. 9,40,000 adds up: not asked.\n2. Printed total 8,34,996 with 8,20,000 and 8,13,000 handwritten below: one option, three finalPriceCandidates, finalPrice below 0.8, ask which amount the dealer promised. dealStage negotiated, not asked.\n3. Creta page. One sheet with Creta SX and Creta SX(O) side by side, and a Seltos below: two options for the two Creta variants, each read in full, lines never mixed. otherModels [\"Seltos\"]; none of its numbers read.\n4. Wagon R page. Handwritten note with no car name, ex-showroom 5,78,500, within 2,000 of Wagon R VXi: modelMatch by_price, variant at most 0.6, ask the variant.\n5. Nexon page, but the quote is only for a Fortuner at ex-showroom 33,00,000, far from every Nexon variant: modelMatch none, options [].\n6. A printed proforma with no discount anywhere: dealStage opening. No question about other discounts (asked after Compare).\n7. Seltos handwritten \"S.C 5,715/-\": the amount is 5,715, not 57,150, and the sum confirms it. S.C is not on the short form list, so ask what it covers.\n8. Fronx: lines add up to the on-road 7,70,000. \"Ex-warranty + CCP -> 14,985 (3 yr / 1 lakh km)\" below the total is not_in_final, no question. ZD next to insurance means zero dep.\n9. Swift VXi: \"HP.T/R & Service charges 5,703\" and \"CESS 5,000\": both go to others; ask what each covers.\n10. Ceramic coating 28,000 and accessories 35,000 as separate lines: both accessories (coating high, accessories medium), status paid, no question.\n";
+  const VERDICT_PROMPT = "You write a short note for a car buyer on CarWale. They have just checked a dealer's on-road price quote with BuySure. Many readers are first-time buyers from smaller cities, and English may not be their first language. Use very simple words and short sentences.\n\nThe screen above your note already shows the result (\"{result label, e.g. Looks like a good deal}\"), so don't repeat it.\n\nToday is {today, YYYY-MM-DD}.\n\nDATA (already calculated by our system; never add, subtract or work out a new amount):\n{production verdict payload: request, fixedPartBreakdown, extrasBreakdown, periodTimingBreakdown, festiveTimingBreakdown, targetBreakdown, preferences}\n\nWHAT THE DATA MEANS (for you only: never use field names, or words like \"fixed part\", \"extras\", \"removable share\", \"target\", \"signal\", \"overflow\", \"room\", \"typical\" or \"roughly\" in the note)\n- Ex-showroom, registration (RTO), insurance and TCS are fixed charges. They have a set price and are normally the same at every dealer.\n- Fixed charges higher than usual: for ex-showroom, take fixedPartBreakdown.ExShowroom.UserAmount and drop its last four digits (Rs. 54,42,201 becomes Rs. 544). Ex-showroom is a little higher than usual if extrasBreakdown.ExShowroom.Amount is at or above that line. Registration and TCS are a little higher than usual if extrasBreakdown.Rto.Amount or Tcs.Amount is more than 0. Insurance is a little higher than usual if extrasBreakdown.Insurance.Amount is Rs. 500 or more. Otherwise treat the charge as the usual price.\n- extrasBreakdown.Accessories, Warranty (extended warranty), ServicePlan (service plan) and OtherAddOns (other add-ons) are add-ons the buyer can keep or remove. An add-on is on the quote if its Amount is more than 0. The ones with the largest RemovableShare matter most.\n- fixedPartBreakdown.CashDiscountOffer is the manufacturer cash discount. It is on the quote only if it is more than 0.\n- festiveTimingBreakdown lists festivals, and periodTimingBreakdown.Period is a month, quarter or year end (\"None\" means no period reason). In preferences, a preferenceName of \"Stock older than July\" or \"Manufactured in 2025\" means the buyer is fine with older stock.\n- Never mention targetBreakdown.TargetPrice, Gap, GapPercent, request.CashDiscount or request.ExchangeAmount.\n\nLENGTH (the most important rule)\nEach section should fill about 3 lines on a phone, which is 22 to 30 words. It can run to 4 lines, which is 40 words, when the facts are important. Never more than 40 words. Headings don't count. If a section is under 20 words, add the next filler from its list. If it is over 40 words, drop its lowest item.\n\nFORMAT\nTwo sections. The heading on its own line, the text on the next line, and an empty line between the sections.\n\nSection 1. Heading, exactly: \"What we found in your quote\". Only facts, no asks. Items in priority order:\n- Room to negotiate or Close to a fair price:\n  1. Fixed charges. If any is a little higher than usual, name it in bold with double asterisks, with no amount: \"**Registration and TCS are a little higher than usual.**\" Otherwise: \"Ex-showroom, registration, insurance and TCS are at the usual price.\"\n  2. Add-ons. Name the one or two on the quote with the largest RemovableShare, with no amounts: \"Your quote has add-ons, mainly accessories and other add-ons.\" Skip if there are none.\n  3. Offer. If fixedPartBreakdown.CashDiscountOffer is more than 0, name it with that amount: \"This car has a Rs. 10,000 manufacturer discount.\" Skip if there is none.\n  4. Fillers, only if the section is still under 20 words, in this order: (a) \"These have a set price, so they are normally the same at every dealer.\" (b) if some fixed charges are higher, name the ones at the usual price: \"Registration and insurance are at the usual price.\" Skip (b) if all four are higher.\n- Good deal: item 1 as above, then \"Your add-ons and discount look normal for this car.\"\n- Lower than usual: \"This price is much lower than usual for this car.\"\n\nSection 2. Heading, exactly: \"Recommended\". Only asks, no new facts. Items in priority order:\n- Room to negotiate or Close to a fair price:\n  1. One sentence with up to two asks: check the higher fixed charges, and remove add-ons you don't need. Leave out a part that doesn't apply. Example: \"Ask the dealer to check registration and TCS, and remove add-ons you don't need.\"\n  2. One timing reason, if any applies: a festival from the list that falls after today, the period end, or that the buyer is fine with older stock. It must end with \"ask for a bigger discount\", for example \"With Diwali coming, ask for a bigger discount.\" It is only about the discount, never about the fixed charges.\n  3. If section 1 named an offer: \"Check the manufacturer discount is applied.\"\n  4. Filler, only if the section is still under 20 words: \"Check the final price and what it includes before you pay.\"\n- Good deal: \"It looks like a fair price to go ahead. Check the add-ons list before you pay.\"\n- Lower than usual: \"Before paying, check the car's manufacturing month and that the price covers everything.\"\n\nRULES\n- Never give a price the buyer can get, a target price, or what other buyers pay.\n- At most one amount in the whole note. No amounts for add-ons or fixed charges.\n- Amounts as Rs. with Indian digit grouping (Rs. 1,25,000). Never \"lakh\", never Rs. 0, never a minus sign.\n- Never use: should, must, overcharged, overcharging, save, saving, savings, padding, padded, benchmark, DPS, scam, cheat, cheated, rip-off, fleece, verdict, guarantee, guaranteed. No exclamation marks.\n- Never suggest the dealer is overcharging.\n- Headings are plain text: no #, no bold, no colon. Use bold only for the fixed charges that are a little higher.\n\nEXAMPLE (a different car: copy the length and style, not the content)\nWhat we found in your quote\n**Ex-showroom is a little higher than usual.** These have a set price, so they are normally the same at every dealer. Your quote has add-ons, mainly accessories and the extended warranty.\n\nRecommended\nAsk the dealer to check ex-showroom, and remove add-ons you don't need. It is the month end, so ask for a bigger discount.\n\nOutput: a JSON object with exactly two keys. \"explanation\" holds the text for \"What we found in your quote\" (without the heading). \"recommendation\" holds the text for \"Recommended\" (without the heading). No other keys, no markdown, no text outside the JSON object.";
+  const PAGE = { modelId: 'swift', cityId: 'mumbai', versionId: 'lxi-petrol-manual' };
+  const MAX_Q1 = 5, MAX_OPTS = 7, MAX_Q2 = 7;
+  const rsI = v => '₹' + Math.round(Math.abs(Number(v) || 0)).toLocaleString('en-IN');
+  const numv = v => Number(String(v == null ? '' : v).replace(/[^\d.]/g, '')) || 0;
+  const ROWS = [['ex', 'exShowroom', 'Ex-showroom'], ['rto', 'rto', 'RTO Registration'], ['tcs', 'tcs', 'TCS Tax (1%)'], ['ins', 'insurance', 'Insurance Premium'],
+    ['acc', 'accessories', 'Accessories'], ['ew', 'extendedWarranty', 'Extended Warranty'], ['sp', 'servicePlan', 'Service Plan'], ['handling', 'handling', 'Handling Charges'], ['others', 'others', 'Others']];
+  const F2K = {}; ROWS.forEach(r => { F2K[r[1]] = r[0]; });
+  const SIGNAL = { room: ['Room to negotiate', '#E8735C'], close: ['Close to a fair price', '#D77904'], good: ['Looks like a good deal', '#009488'], lower: ['Lower than usual', '#0979B6'] };
+  const ICON = {
+    close: '<svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>',
+    back: '<svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/></svg>',
+    check: '<svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M9 16.17 4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>'
+  };
+  const model = () => cat.models[PAGE.modelId];
+  const verOf = id => model().versions.find(v => v.id === id) || null;
+  let pc = null, pcEl = null;
+
+  // ---------- open / close ----------
+  function openCheck(file, opts) {
+    closeCheck(true);
+    pc = { id: 'QR-' + Math.floor(100000 + Math.random() * 900000), source: (opts && opts.source) || 'pic', file, step: 'analysing', images: null, thumb: null,
+      lines: 0, err: null, x: null, opt: null, asked: [], ans1: {}, q1: null, cur: null, bk: null, q2: [], q2i: 0, ans2: {}, r: null, note: null, reviewed: false };
+    pcEl = document.createElement('div'); pcEl.className = 'bsmp pc'; pcEl.setAttribute('role', 'dialog'); pcEl.setAttribute('aria-modal', 'true'); pcEl.setAttribute('aria-label', 'Check your quote');
+    screenEl.appendChild(pcEl);
+    pcEl.addEventListener('click', onClick); pcEl.addEventListener('input', onInput); pcEl.addEventListener('change', onChange);
+    log('upload', (opts && opts.source === 'whatsapp' ? 'from WhatsApp chat, ' : '') + (file.type || 'file'));
+    pcRender(); runRead(pc.id);
+  }
+  function closeCheck(silent) {
+    if (!pcEl) return;
+    if (!silent && pc && pc.step !== 'verdict') log('popup_close', 'left at ' + pc.step + (pc.x ? ', record ' + pc.id + ' abandoned_' + pc.step : ''));
+    pcEl.remove(); pcEl = null; pc = null;
+  }
+
+  // ---------- reading ----------
+  function fillPrompt(tpl, map) { return Object.keys(map).reduce((s, k) => s.split('{{' + k + '}}').join(map[k]), tpl); }
+  function variantList(cityId) {
+    return JSON.stringify(model().versions.map(v => { const p = BS.prefill(cat, PAGE.modelId, v.id, cityId); return [v.id, v.name, v.fuel, v.trans, v.ex, p.refOnRoad]; }));
+  }
+  async function runRead(id) {
+    const timer = setInterval(() => { if (pc && pc.id === id && pc.step === 'analysing' && pc.lines < 3) { pc.lines++; pcRender(); } }, 1400);
+    try {
+      pc.images = await BS.prepareImages(pc.file);
+      if (!pc || pc.id !== id) return;
+      pc.thumb = pc.images[0] && pc.images[0].dataUrl; pcRender();
+      const m = model();
+      const prompt = fillPrompt(EXTRACT_PROMPT, { PAGE_MAKE: m.make, PAGE_MODEL: m.name, PAGE_VARIANT: (verOf(PAGE.versionId) || {}).name || '', PAGE_CITY: cat.cities[PAGE.cityId].name,
+        VARIANT_LIST: variantList(PAGE.cityId), OFFERS: JSON.stringify(m.offers.map(o => [o.type, o.amount])), TODAY: new Date().toISOString().slice(0, 10),
+        MAX_QUESTIONS: String(MAX_Q1), MAX_OPTIONS: String(MAX_OPTS) });
+      const x = await llm.readQuote(pc.images, prompt);
+      if (!pc || pc.id !== id) return;
+      clearInterval(timer);
+      pc.x = x || {};
+      if (pc.x.documentType && pc.x.documentType !== 'dealer_quote') { log('upload_rejected', pc.x.documentType + ' (nothing stored)'); pc.x = null; pc.err = 'notquote'; pcRender(); return; }
+      const opts = (pc.x.options || []).filter(o => o && o.items);
+      if (pc.x.modelMatch === 'none' || !opts.length) { log('other_model_quote', (pc.x.otherModels || []).join(', ') || 'unknown'); log('record ' + pc.id, 'status other_model'); pc.err = 'othermodel'; pcRender(); return; }
+      pc.x.options = opts;
+      pc.opt = opts.length === 1 ? opts[0] : null;
+      log('record ' + pc.id, 'status extracted, ' + opts.length + ' option(s), modelMatch ' + (pc.x.modelMatch || 'exact') + ', trust ' + trust().score.toFixed(2));
+      startSet1();
+    } catch (e) {
+      clearInterval(timer);
+      if (!pc || pc.id !== id) return;
+      pc.err = e && e.code === 'no_model' ? 'nomodel' : 'error';
+      log('read_error', (e && (e.code || e.message)) || 'failed'); pcRender();
+    }
+  }
+
+  // ---------- question set 1 (mandatory, max 5) ----------
+  function clean(q) { // ends with "Not sure", "Something else" where useful, max 7 options
+    const allowOther = !!q.allowOther || !(q.options || []).filter(o => o && o.value !== 'not_sure').length;
+    const opts = (q.options || []).filter(o => o && o.value !== 'not_sure' && !/^not sure$/i.test(o.label || '')).slice(0, MAX_OPTS - 1 - (allowOther ? 1 : 0));
+    return Object.assign({}, q, { options: opts, allowOther });
+  }
+  function bestVersion(o) {
+    const id = o.variant && o.variant.versionId;
+    if (id && verOf(id)) return id;
+    const c = (o.variantCandidates || []).find(v => verOf(v.versionId)); if (c) return c.versionId;
+    const ex = numv(o.items && o.items.exShowroom);
+    if (ex) return model().versions.slice().sort((a, b) => Math.abs(a.ex - ex) - Math.abs(b.ex - ex))[0].id;
+    return BS.bestMatchByTotal(cat, PAGE.modelId, PAGE.cityId, numv(o.finalPrice)).id;
+  }
+  function queue1() {
+    const out = [], x = pc.x, o = pc.opt;
+    if (x.options.length >= 2) out.push({ id: 'which', order: 1, app: true, card: 'single', text: 'Your quote shows ' + x.options.length + ' ' + model().name + ' variants. Which one do you want to check?',
+      options: x.options.slice(0, MAX_OPTS - 1).map(op => ({ label: (op.label || op.variantAsWritten || 'Option ' + op.optionId) + ' · ' + rsI(op.finalPrice), value: op.optionId })), allowOther: false });
+    if (!o) return out;
+    (o.questions || []).forEach(q => out.push(Object.assign(clean(q), { id: 'llm_' + (q.id || Math.random()), order: q.step === 2 ? 2 : q.step === 4 ? 4 : q.step === 5 ? 5 : 7 })));
+    if (o.cityMatchesPage === false && o.printedCity) {
+      const qc = BS.matchCity(cat, o.printedCity);
+      out.push({ id: 'city', order: 3, app: true, card: 'single', text: 'Your quote is from ' + o.printedCity + '. Where will the car be registered?',
+        options: [{ label: o.printedCity, value: qc || 'quote_city' }, { label: cat.cities[PAGE.cityId].name, value: PAGE.cityId }], allowOther: false });
+    }
+    const vId = (pc.ans1.variantPick) || bestVersion(o), cityId = pc.ans1.cityId || PAGE.cityId, rto = numv(o.items.rto);
+    const ref = BS.refs(cat, PAGE.modelId, vId, cityId, {}).rto;
+    if (rto > 0 && ref && Math.abs(rto - ref) / ref > 0.10) {
+      const low = rto < ref;
+      out.push({ id: 'rto', order: 6, app: true, card: 'single', text: 'Registration is ' + rsI(rto) + ', ' + (low ? 'lower' : 'higher') + ' than usual. Why?',
+        options: (low ? [['BH series registration', 'bh'], ['Company or commercial registration', 'company'], ['Registered in another city or state', 'other_state'], ['Some of it is paid separately', 'partly_separate']]
+          : [['It includes other charges', 'includes_other'], ['Registered in another city or state', 'other_state'], ['Company or commercial registration', 'company'], ['Fancy or choice number', 'choice_number']]).map(([label, value]) => ({ label, value })), allowOther: true });
+    }
+    return out.sort((a, b) => a.order - b.order);
+  }
+  function startSet1() { pc.step = 'set1'; nextQ1(); }
+  function remaining1() { return queue1().filter(q => !pc.asked.includes(q.id)); }
+  function nextQ1() {
+    const rest = remaining1();
+    if (rest.length && pc.asked.length < MAX_Q1) { pc.cur = rest[0]; pc.sel = null; pc.other = ''; pcRender(); return; }
+    const dropped = rest.map(q => q.text);
+    if (dropped.length) log('set1_dropped', dropped.length + ' over the cap: ' + dropped.map(t => t.slice(0, 40)).join(' | '));
+    buildBreakup(); pc.step = 'breakup'; pcRender();
+  }
+  function totalQ1() { return Math.min(MAX_Q1, pc.asked.length + remaining1().length); }
+  function answer1(q, value, other) {
+    pc.asked.push(q.id); pc.ans1[q.id] = { q, value, other };
+    if (q.id === 'which') { const op = pc.x.options.find(o => o.optionId === value) || pc.x.options[0]; pc.opt = op; }
+    if (q.order === 2 && verOf(value)) pc.ans1.variantPick = value;
+    if (q.id === 'city' && cat.cities[value]) pc.ans1.cityId = value;
+    log('record ' + pc.id, 'answering: ' + (q.text.slice(0, 48)) + ' -> ' + (Array.isArray(value) ? value.join('+') : value) + (other ? ' "' + other + '"' : '') + ', trust ' + trust().score.toFixed(2));
+    nextQ1();
+  }
+
+  // ---------- breakup ----------
+  function buildBreakup() {
+    const o = pc.opt, it = o.items || {}, bk = { items: {}, orange: new Set(), edited: false };
+    ROWS.forEach(([k, f]) => { bk.items[k] = numv(it[f]); });
+    let cash = 0, exch = 0; const elig = {};
+    (o.discounts || []).forEach(d => { const a = numv(d.amount); if (d.kind === 'exchange' || d.kind === 'scrappage') exch += a; else cash += a; if (['exchange', 'corporate', 'loyalty'].includes(d.kind)) elig[d.kind] = true; });
+    bk.addBack = { booking: numv(o.deductions && o.deductions.bookingAmount), exchangeValue: numv(o.deductions && o.deductions.oldCarExchangeValue) };
+    bk.total = numv(o.finalPrice);
+    bk.cash = cash; bk.exch = exch; bk.eligibility = elig;
+    bk.addons = (o.insuranceAddons || []).filter(a => ['zd', 'rti', 'rsa', 'eng', 'cons'].includes(a));
+    bk.versionId = pc.ans1.variantPick || bestVersion(o);
+    bk.cityId = pc.ans1.cityId || PAGE.cityId;
+    bk.quoteDate = o.quoteDate || null;
+    // apply set 1 answers
+    Object.values(pc.ans1).forEach(a => {
+      if (!a || !a.q) return;
+      const q = a.q, v = a.value;
+      if (v === 'not_sure' || (v === 'other' && !a.other)) { markOrange(bk, q); return; }
+      if (q.field === 'finalPrice') { const amt = v === 'other' ? numv(a.other) : numv(v); if (amt) bk.total = amt; }
+      if (q.field === 'component') {
+        const c = (o.components || []).find(c => c.id === q.componentId), amt = c ? numv(c.amount) : 0, k = c && F2K[c.field];
+        if (v === 'free' && amt) { if (k) bk.items[k] += amt; else bk.items.acc += amt; bk.cash += amt; }
+        else if (v === 'removed' && k && bk.items[k] >= amt && c.sign !== 'subtract') bk.items[k] -= amt;
+        else if (amt) {
+          const to = F2K[v] || (v === 'loan_or_registration_fees' || v === 'government_tax' ? 'rto' : v === 'dealer_service_charge' ? 'others' : null);
+          if (to && k && k !== to && bk.items[k] >= amt) { bk.items[k] -= amt; bk.items[to] += amt; }
+        }
+      }
+      if (q.field === 'discount') (Array.isArray(v) ? v : [v]).forEach(kind => { if (['exchange', 'corporate', 'loyalty'].includes(kind)) bk.eligibility[kind] = true; });
+    });
+    remaining1().forEach(q => markOrange(bk, q)); // dropped over the cap
+    if (!bk.total) bk.total = sumItems(bk) - bk.cash - bk.exch - bk.addBack.booking - bk.addBack.exchangeValue;
+    pc.bk = bk;
+  }
+  function markOrange(bk, q) {
+    if (q.order === 2 || q.id === 'which') bk.orange.add('variant');
+    else if (q.field === 'finalPrice') bk.orange.add('total');
+    else if (q.field === 'discount') bk.orange.add('cash');
+    else if (q.field === 'component') { const c = (pc.opt.components || []).find(c => c.id === q.componentId); bk.orange.add((c && F2K[c.field]) || 'others'); }
+    else if (q.id === 'rto') bk.orange.add('rto');
+  }
+  const sumItems = bk => ROWS.reduce((s, [k]) => s + (bk.items[k] || 0), 0);
+  function breakupState() {
+    const bk = pc.bk, need = [];
+    if (!bk.items.ex) need.push('ex'); if (!bk.items.rto) need.push('rto');
+    const net = sumItems(bk) - bk.cash - bk.exch - bk.addBack.booking - bk.addBack.exchangeValue;
+    const typo = bk.total > 0 && net > 0 && Math.abs(net - bk.total) / bk.total > 0.2;
+    return { need, typo, ok: !need.length && !typo && bk.total >= 100000 };
+  }
+  function useCarWalePrices() {
+    const p = BS.prefill(cat, PAGE.modelId, pc.bk.versionId, pc.bk.cityId);
+    ['ex', 'rto', 'tcs', 'ins'].forEach(k => { if (!pc.bk.items[k]) pc.bk.items[k] = p.items[k] || 0; });
+    log('use_carwale_prices', (verOf(pc.bk.versionId) || {}).name || ''); pcRender();
+  }
+
+  // ---------- question set 2 (skippable, max 7) ----------
+  function buildSet2() {
+    const bk = pc.bk, o = pc.opt, m = model(), q = [], yn = [{ label: 'Yes', value: 'yes' }, { label: 'No', value: 'no' }];
+    const askedDiscount = Object.values(pc.ans1).some(a => a && a.q && a.q.field === 'discount');
+    if (!bk.addBack.booking && !bk.addBack.exchangeValue) q.push({ id: 'deduct', text: 'Was an exchange value or booking amount taken off this total?', card: 'single',
+      options: [{ label: 'Booking amount taken off', value: 'booking', amount: true }, { label: 'Old car value taken off', value: 'exchangeValue', amount: true }, { label: 'Neither', value: 'none' }] });
+    const unknownDisc = (o.discounts || []).find(d => d.kind === 'unknown' && numv(d.amount) >= 500);
+    if (unknownDisc && !askedDiscount) q.push({ id: 'disc', text: 'What was the ' + rsI(unknownDisc.amount) + ' ' + (unknownDisc.label || 'discount') + ' on your quote for?', card: 'multi',
+      options: ['cash', 'exchange', 'corporate', 'loyalty', 'insurance', 'dealer'].map(v => ({ label: { cash: 'Cash discount', exchange: 'Exchange bonus', corporate: 'Corporate discount', loyalty: 'Loyalty bonus', insurance: 'Insurance discount', dealer: 'Dealer discount' }[v], value: v })) });
+    if (m.offers.some(x => x.type === 'exchange') && bk.eligibility.exchange === undefined) q.push({ id: 'exchange', text: 'Are you exchanging your old car?', card: 'single', options: yn });
+    if (m.offers.some(x => x.type === 'loyalty') && bk.eligibility.loyalty === undefined) q.push({ id: 'loyalty', text: 'Do you already own a ' + m.make + ' car?', card: 'single', options: yn });
+    if (m.offers.some(x => x.type === 'corporate') && bk.eligibility.corporate === undefined) q.push({ id: 'corporate', text: 'Do you get a corporate discount from your employer?', card: 'single', options: yn });
+    q.push({ id: 'extra', text: 'Has the dealer offered any extra discount, on call, WhatsApp or in person?', card: 'single', options: [{ label: 'Yes', value: 'yes', amount: true }, { label: 'No', value: 'no' }] });
+    if (!(o.dealer && o.dealer.name && (o.fieldConfidence || {}).dealer >= 0.8)) q.push({ id: 'dealer', text: 'Which dealer gave you this quotation?', card: 'single', allowOther: true,
+      options: BS.dealersFor(cat, m.make, bk.cityId).slice(0, 4).map(d => ({ label: d.name + (d.area ? ', ' + d.area : ''), value: d.name + (d.area ? ', ' + d.area : '') })) });
+    if (!bk.items.ins) q.push({ id: 'insNone', text: "Insurance isn't included. How will the car be insured?", card: 'single',
+      options: [{ label: 'The dealer will add it', value: 'dealer' }, { label: "I'll buy it myself", value: 'self' }, { label: 'My company or lease covers it', value: 'company' }] });
+    else if (!bk.addons.length) q.push({ id: 'zd', text: 'Does your insurance include zero depreciation cover?', card: 'single', options: yn });
+    q.push({ id: 'mfg', text: "What's the manufacturing year of the car?", card: 'single', options: [{ label: '2026', value: '2026' }, { label: '2025', value: '2025' }] });
+    q.push({ id: 'wait', text: 'How long is the waiting period?', card: 'single', options: [{ label: 'Ready stock', value: 'ready' }, { label: 'Up to 1 month', value: 'lt1m' }, { label: '1 to 3 months', value: '1to3m' }, { label: 'More than 3 months', value: 'gt3m' }] });
+    if (!bk.quoteDate) q.push({ id: 'qdate', text: 'When did you get this quote?', card: 'single', options: [{ label: 'Today', value: 'today' }, { label: 'This week', value: 'week' }, { label: 'Earlier', value: 'earlier' }] });
+    pc.q2 = q.slice(0, MAX_Q2); pc.q2i = 0;
+  }
+  function answer2(q, value, amount, other) {
+    pc.ans2[q.id] = { q, value, amount, other };
+    const bk = pc.bk;
+    if (q.id === 'deduct' && amount && (value === 'booking' || value === 'exchangeValue')) bk.addBack[value] = amount;
+    if (q.id === 'disc') (Array.isArray(value) ? value : [value]).forEach(k => { if (['exchange', 'corporate', 'loyalty'].includes(k)) bk.eligibility[k] = true; });
+    if (['exchange', 'loyalty', 'corporate'].includes(q.id) && value !== 'not_sure') bk.eligibility[q.id] = value === 'yes';
+    if (q.id === 'zd' && value === 'yes') bk.addons = ['zd'];
+    log('answer', q.id + ' -> ' + (Array.isArray(value) ? value.join('+') : value) + (amount ? ' ' + rsI(amount) : '') + (other ? ' "' + other + '"' : ''));
+  }
+
+  // ---------- verdict ----------
+  function computeVerdict() {
+    const bk = pc.bk, items = Object.assign({}, bk.items);
+    const sum = sumItems(bk), bal = bk.total - sum + bk.cash + bk.exch + bk.addBack.booking + bk.addBack.exchangeValue;
+    let cash = bk.cash; if (bal >= 0) items.others += bal; else cash += -bal;
+    const v = verOf(bk.versionId);
+    return BS.compute({ catalog: cat, modelId: PAGE.modelId, versionId: bk.versionId, cityId: bk.cityId, cityName: cat.cities[bk.cityId].name, today: new Date().toISOString().slice(0, 10),
+      timingDate: 'today', quoteDate: bk.quoteDate, total: bk.total, items, cash, exch: bk.exch, discountSplit: null, addons: bk.addons, eligibility: bk.eligibility,
+      addBack: bk.addBack, method: 'upload', quotedCc: v && v.cc, quotedFuel: v && v.fuel });
+  }
+  function prefsList() {
+    const out = [], a = pc.ans2;
+    if (a.mfg && a.mfg.value === '2025') out.push({ preferenceId: 3, preferenceName: 'Manufactured in 2025' });
+    if (a.wait && a.wait.value === 'ready') out.push({ preferenceId: 8, preferenceName: 'Opting for faster delivery' });
+    return out;
+  }
+  function payload(r) {
+    const it = pc.bk.items, R = BS.tables.removable, p = r.parts;
+    const period = (r.dps.items.find(i => i.id === 'period_end') || {}).period;
+    return {
+      request: { ExShowroom: it.ex, Rto: it.rto, Tcs: it.tcs, Insurance: it.ins, Accessories: it.acc, Warranty: it.ew, ServicePlan: it.sp, OtherAddOns: it.handling + it.others, CashDiscount: pc.bk.cash, ExchangeAmount: pc.bk.exch, Total: pc.bk.total },
+      fixedPartBreakdown: { ExShowroom: { UserAmount: it.ex, Reference: r.refs.ex }, Rto: { UserAmount: it.rto, Reference: r.refs.rto }, Insurance: { UserAmount: it.ins, Reference: r.insurance.ceiling },
+        Tcs: { UserAmount: it.tcs, Reference: r.refs.tcs || 0 }, CashDiscountOffer: r.O },
+      extrasBreakdown: { ExShowroom: { Amount: p.exOver }, Rto: { Amount: p.rtoOver }, Tcs: { Amount: p.tcsOver }, Insurance: { Amount: p.insOver },
+        Accessories: { Amount: it.acc, RemovableShare: Math.round(R.accessories * it.acc) }, Warranty: { Amount: it.ew, RemovableShare: Math.round(R.extendedWarranty * it.ew) },
+        ServicePlan: { Amount: it.sp, RemovableShare: Math.round(R.servicePlan * it.sp) }, OtherAddOns: { Amount: it.handling + it.others, RemovableShare: Math.round(R.handling * it.handling + R.others * it.others) } },
+      periodTimingBreakdown: { Period: period ? period[0].toUpperCase() + period.slice(1) : 'None' },
+      festiveTimingBreakdown: r.dps.items.filter(i => i.festival).map(i => ({ Festival: i.festival })),
+      targetBreakdown: { TargetPrice: Math.round(r.A), Gap: Math.round(r.gap), GapPercent: Math.round(r.gapPct * 100) / 100 },
+      preferences: prefsList()
+    };
+  }
+  function fixedState(P) {
+    const x = P.extrasBreakdown, line = Math.floor(P.fixedPartBreakdown.ExShowroom.UserAmount / 10000);
+    const hi = { ex: x.ExShowroom.Amount > 0 && x.ExShowroom.Amount >= line, rto: x.Rto.Amount > 0, tcs: x.Tcs.Amount > 0, ins: x.Insurance.Amount >= 500 };
+    return hi;
+  }
+  const joinAnd = a => a.length <= 1 ? (a[0] || '') : a.slice(0, -1).join(', ') + ' and ' + a[a.length - 1];
+  const cap = s => s.charAt(0).toUpperCase() + s.slice(1);
+  function higherNames(hi) {
+    const n = []; if (hi.ex) n.push('ex-showroom');
+    if (hi.rto && hi.tcs) n.push('registration and TCS'); else { if (hi.rto) n.push('registration'); if (hi.tcs) n.push('TCS'); }
+    if (hi.ins) n.push('insurance'); return n;
+  }
+  function templateNote(signal, P) {
+    const hi = fixedState(P), names = higherNames(hi), wc = s => s.split(/\s+/).filter(Boolean).length;
+    const fixed = names.length ? '**' + cap(joinAnd(names)) + (names.length > 1 || hi.rto && hi.tcs ? ' are' : ' is') + ' a little higher than usual.**' : 'Ex-showroom, registration, insurance and TCS are at the usual price.';
+    if (signal === 'lower') return { explanation: 'This price is much lower than usual for this car.', recommendation: "Before paying, check the car's manufacturing month and that the price covers everything." };
+    if (signal === 'good') return { explanation: fixed + ' Your add-ons and discount look normal for this car.', recommendation: 'It looks like a fair price to go ahead. Check the add-ons list before you pay.' };
+    const x = P.extrasBreakdown, addons = [['accessories', x.Accessories], ['the extended warranty', x.Warranty], ['a service plan', x.ServicePlan], ['other add-ons', x.OtherAddOns]]
+      .filter(a => a[1].Amount > 0).sort((a, b) => b[1].RemovableShare - a[1].RemovableShare).slice(0, 2).map(a => a[0]);
+    const offer = P.fixedPartBreakdown.CashDiscountOffer;
+    let s1 = [fixed]; if (addons.length) s1.push('Your quote has add-ons, mainly ' + joinAnd(addons) + '.');
+    if (offer > 0) s1.push('This car has a Rs. ' + Math.round(offer).toLocaleString('en-IN') + ' manufacturer discount.');
+    if (wc(s1.join(' ')) < 20) s1.splice(1, 0, 'These have a set price, so they are normally the same at every dealer.');
+    if (wc(s1.join(' ')) < 20 && names.length && names.length < 4) {
+      const usual = ['ex-showroom', 'registration', 'insurance', 'TCS'].filter(n => !(n === 'ex-showroom' && hi.ex) && !(n === 'registration' && hi.rto) && !(n === 'insurance' && hi.ins) && !(n === 'TCS' && hi.tcs));
+      if (usual.length) s1.push(cap(joinAnd(usual)) + (usual.length > 1 ? ' are' : ' is') + ' at the usual price.');
+    }
+    const asks = []; if (names.length) asks.push('check ' + joinAnd(names)); if (addons.length) asks.push("remove add-ons you don't need");
+    const s2 = []; if (asks.length) s2.push('Ask the dealer to ' + asks.join(', and ') + '.');
+    const today = new Date().toISOString().slice(0, 10);
+    const fest = P.festiveTimingBreakdown[0], per = P.periodTimingBreakdown.Period;
+    if (fest) s2.push('With ' + fest.Festival + ' coming, ask for a bigger discount.');
+    else if (per && per !== 'None') s2.push('It is the ' + per.toLowerCase() + ' end, so ask for a bigger discount.');
+    else if (P.preferences.some(p => /2025|July/.test(p.preferenceName))) s2.push("Since you're fine with older stock, ask for a bigger discount.");
+    if (offer > 0) s2.push('Check the manufacturer discount is applied.');
+    if (wc(s2.join(' ')) < 20) s2.push('Check the final price and what it includes before you pay.');
+    void today;
+    return { explanation: s1.join(' '), recommendation: s2.join(' ') };
+  }
+  function checkNote(o) {
+    const issues = [];
+    if (!o || typeof o !== 'object' || Object.keys(o).sort().join() !== 'explanation,recommendation') return ['not exactly two keys'];
+    const all = o.explanation + ' ' + o.recommendation;
+    [o.explanation, o.recommendation].forEach((t, i) => { const w = String(t).split(/\s+/).filter(Boolean).length; if (w > 40) issues.push((i ? 'recommendation' : 'explanation') + ' over 40 words'); });
+    const ban = all.match(/\b(room|typical|roughly|extras|target|signal|overflow|lakh|should|must|overcharg\w*|sav(e|es|ing|ings)|padd(ing|ed)|benchmark|dps|scam|cheat\w*|rip-?off|fleece|verdict|guarantee\w*)\b/i);
+    if (ban) issues.push('banned word: ' + ban[0]);
+    if (all.includes('!')) issues.push('exclamation mark');
+    if (/(^|\n)\s*#|What we found in your quote|Recommended/.test(all)) issues.push('heading inside text');
+    (all.match(/\*\*[^*]+\*\*/g) || []).forEach(b => { if (!/higher than usual/.test(b)) issues.push('bold on other text'); });
+    const amts = all.match(/Rs\.?\s*[\d,]+/g) || [];
+    if (amts.length > 1) issues.push('more than one amount');
+    if (amts.length === 1 && !/manufacturer discount/.test(all)) issues.push('amount is not the manufacturer discount');
+    if (/Rs\.?\s*0\b(?![,\d])|(-|−)\s*Rs/.test(all)) issues.push('Rs. 0 or minus');
+    amts.forEach(a => { const d = a.replace(/[^\d,]/g, ''); if (d.length > 3 && !/^\d{1,2}(,\d{2})*,\d{3}$/.test(d)) issues.push('not Indian grouping'); });
+    return issues;
+  }
+  async function runVerdict(id) {
+    pc.step = 'verdictLoad'; pcRender();
+    const r = computeVerdict(), P = payload(r), label = SIGNAL[r.signal][0];
+    const prompt = VERDICT_PROMPT.replace('{result label, e.g. Looks like a good deal}', label).replace('{today, YYYY-MM-DD}', new Date().toISOString().slice(0, 10))
+      .replace('{production verdict payload: request, fixedPartBreakdown, extrasBreakdown, periodTimingBreakdown, festiveTimingBreakdown, targetBreakdown, preferences}', JSON.stringify(P, null, 1));
+    let note = null, source = 'template', issues = [];
+    const wait = new Promise(res => setTimeout(res, 1600));
+    try {
+      const txt = await Promise.race([llm.writeVerdict(prompt), new Promise((_, rej) => setTimeout(() => rej({ code: 'timeout' }), 20000))]);
+      const o = BS.parseJson(txt); issues = checkNote(o);
+      if (!issues.length) { note = o; source = 'model'; }
+    } catch (e) { issues = [(e && (e.code || e.message)) || 'model unavailable']; }
+    await wait;
+    if (!pc || pc.id !== id) return;
+    if (!note) note = templateNote(r.signal, P);
+    pc.r = r; pc.note = note; pc.step = 'verdict';
+    log('record ' + pc.id, 'verdict_shown: ' + label + ' (gap ' + r.gapPct.toFixed(2) + '%), note from ' + source + (issues.length ? ' [' + issues.join('; ') + ']' : '') + ', trust ' + trust().score.toFixed(2));
+    pcRender();
+  }
+
+  // ---------- trust score (confidence PRD, PIC changes) ----------
+  function trust() {
+    const reasons = []; let s = 0.9; const o = pc && (pc.opt || (pc.x && pc.x.options && pc.x.options[0]));
+    if (!o) return { score: s, reasons };
+    const fc = o.fieldConfidence || {}, it = o.items || {}, pen = (v, r) => { s -= v; reasons.push('-' + v + ' ' + r); }, bon = (v, r) => { s += v; reasons.push('+' + v + ' ' + r); };
+    if ((fc.breakup != null && fc.breakup <= 0.2) || !numv(it.exShowroom)) pen(0.2, 'no breakup');
+    if (!o.printedCity) pen(0.1, 'no city');
+    if (!o.quoteDate) pen(0.05, 'no date');
+    const vAns = Object.values(pc.ans1).find(a => a && a.q && a.q.order === 2);
+    if ((fc.variant || 0) < 0.8 && (!vAns || vAns.value === 'not_sure' || vAns.value === 'other')) pen(0.1, 'car not clear');
+    if (pc.x.options.length > 1 && !pc.ans1.which) pen(0.1, 'more than one option');
+    if (!numv(it.insurance)) pen(0.05, 'no insurance');
+    if (pc.x.modelMatch === 'by_price') pen(0.1, 'model matched by price');
+    const ver = verOf((pc.bk && pc.bk.versionId) || bestVersion(o)), ex = numv(it.exShowroom);
+    if (ver && ex && Math.abs(ex - ver.ex) / ver.ex > 0.01) pen(0.1, 'ex-showroom more than 1% off');
+    const tot = (pc.bk && pc.bk.total) || numv(o.finalPrice);
+    if (tot && tot % 10000 === 0) pen(0.1, 'round total');
+    if (pc.r && Math.abs(pc.r.gapPct) > 20) pen(0.1, 'more than 20% from target');
+    if (pc.ans2.dealer && pc.ans2.dealer.value !== 'not_sure') bon(0.05, 'dealer');
+    if (pc.ans2.extra && pc.ans2.extra.value !== 'not_sure') bon(0.05, 'deal stage');
+    if (Object.values(pc.ans1).some(a => a && a.q && a.q.field === 'finalPrice' && a.value !== 'not_sure')) bon(0.05, 'final price confirmed');
+    if (Object.values(pc.ans1).some(a => a && a.q && a.q.field === 'component' && (a.value === 'free' || a.value === 'removed'))) bon(0.05, 'minus item marked');
+    if (pc.reviewed) bon(0.05, 'reviewed');
+    s = Math.max(0, Math.min(1, Math.round(s * 100) / 100));
+    return { score: s, reasons };
+  }
+
+  // ---------- render ----------
+  function head(title) { return '<header class="bsmp-head pc-head"><button type="button" data-pc="close" aria-label="Close and go back to the price page">' + ICON.back + '</button><h1>' + esc(title) + '</h1></header>'; }
+  function thumbBtn(cls) { return pc.thumb ? '<button type="button" class="pc-thumb ' + (cls || '') + '" data-pc="viewQuote" aria-label="Open your quote full screen"><img src="' + pc.thumb + '" alt=""></button>' : '<div class="pc-thumb ' + (cls || '') + ' ph"></div>'; }
+  function carLine() { const v = verOf(pc.bk ? pc.bk.versionId : PAGE.versionId); return model().make + ' ' + model().name + (v ? ' ' + v.name : ''); }
+  function pcRender() {
+    if (!pcEl || !pc) return;
+    const s = pc.step; let h = '';
+    if (s === 'analysing') h = viewAnalysing();
+    else if (s === 'set1') h = viewSet1();
+    else if (s === 'breakup') h = viewBreakup();
+    else if (s === 'set2') h = viewSet2();
+    else if (s === 'verdictLoad') h = viewLoader();
+    else if (s === 'verdict') h = viewVerdict();
+    pcEl.innerHTML = h;
+    const sc = pcEl.querySelector('.pc-body'); if (sc && pc.scrollTop0) { sc.scrollTop = 0; pc.scrollTop0 = false; }
+  }
+  function viewAnalysing() {
+    const L = ['Checking it\u2019s a price quote', 'Reading the car and each price', 'Matching with CarWale prices for ' + cat.cities[PAGE.cityId].name, 'Getting your questions ready'];
+    if (pc.err) {
+      const e = { notquote: ["This doesn't seem to be a price quote", 'Try Another Photo'], othermodel: ['This quote looks like it\u2019s for a different car. Open that car\u2019s price page to check it.', 'Upload Another Quote'],
+        nomodel: ['Reading quotes needs a model here. Open the claude.ai link, or add an OpenRouter key in the Prototype panel.', 'Try Again'], error: ["We couldn't read this file", 'Try Again'] }[pc.err];
+      return '<div class="bsmp-page">' + head('Check Your Quote') + '<div class="pc-body"><div class="pc-analyse">' + thumbBtn('big') + '<div class="bsmp-err"><b>' + esc(e[0]) + '</b></div>'
+        + (pc.err === 'error' || pc.err === 'nomodel' ? '<button class="bsmp-btn red block" type="button" data-pc="retry">' + e[1] + '</button>'
+          : '<label class="bsmp-btn red block"><input type="file" accept="image/*,application/pdf" data-pc-file hidden>' + e[1] + '</label>') + '</div></div></div>';
+    }
+    return '<div class="bsmp-page">' + head('Check Your Quote') + '<div class="pc-body"><div class="pc-analyse">' + thumbBtn('big') + '<h2>Analysing your quote</h2><ul class="bsmp-steps">'
+      + L.map((t, i) => '<li class="' + (pc.lines > i ? 'done' : '') + '">' + (pc.lines > i ? ICON.check : '<span class="bsmp-spin" style="width:14px;height:14px;border-width:2px"></span>') + esc(t) + '</li>').join('') + '</ul></div></div></div>';
+  }
+  function optionList(q, sel, name) {
+    const multi = q.card === 'multi', opts = q.options.slice();
+    if (q.allowOther) opts.push({ label: 'Something else', value: 'other' });
+    opts.push({ label: 'Not sure', value: 'not_sure' });
+    const isSel = v => multi ? (sel || []).includes(v) : sel === v;
+    return '<div class="pc-opts" role="' + (multi ? 'group' : 'radiogroup') + '">' + opts.map(op => '<button type="button" class="pc-opt" role="' + (multi ? 'checkbox' : 'radio') + '" aria-checked="' + isSel(op.value) + '" data-pc-opt="' + esc(String(op.value)) + '" data-q="' + name + '">'
+      + '<span class="pc-dot' + (multi ? ' sq' : '') + '">' + (isSel(op.value) ? ICON.check : '') + '</span><span>' + esc(op.label) + '</span></button>'
+      + (op.value === 'other' && isSel('other') ? '<input class="pc-other" data-pc-other="' + name + '" placeholder="Type your answer" value="' + esc(pc.other || '') + '" aria-label="Your answer">' : '')
+      + (op.amount && isSel(op.value) ? '<label class="bsmp-inp pc-amt"><span>₹</span><input inputmode="numeric" data-pc-amt="' + name + '" value="' + (pc.amt ? Number(pc.amt).toLocaleString('en-IN') : '') + '" placeholder="Amount" aria-label="Amount"></label>' : '')).join('') + '</div>';
+  }
+  function answered(q) { const v = pc.sel; if (v == null || (Array.isArray(v) && !v.length)) return false; if (v === 'other' && !String(pc.other || '').trim()) return false; return true; }
+  function viewSet1() {
+    const q = pc.cur, k = pc.asked.length + 1, n = totalQ1();
+    return '<div class="bsmp-page">' + head('Check Your Quote') + '<div class="pc-body"><div class="pc-intro">' + thumbBtn() + '<div><b>We\u2019ve read your quote</b><p>We\u2019re asking a few questions because your answers make your verdict more accurate.</p></div></div>'
+      + '<div class="pc-prog" aria-hidden="true"><i style="width:' + Math.round((k - 1) / n * 100) + '%"></i></div><p class="pc-count">Question ' + k + ' of ' + n + '</p>'
+      + '<div class="pc-card"><h2>' + esc(q.text) + '</h2>' + optionList(q, pc.sel, 'q1') + '</div></div>'
+      + '<div class="bsmp-foot"><button class="bsmp-btn red block" type="button" data-pc="next1" ' + (answered(q) ? '' : 'disabled') + '>' + (k >= n ? 'See Price Breakup' : 'Next') + '</button></div></div>';
+  }
+  function viewBreakup() {
+    const bk = pc.bk, st = breakupState(), v = verOf(bk.versionId), or = k => bk.orange.has(k) ? ' orange' : '';
+    const row = (k, label) => '<label class="pc-row' + or(k) + (st.need.includes(k) ? ' need' : '') + '"><span>' + label + (bk.orange.has(k) ? '<small>Please check this on your quote</small>' : '') + '</span><span class="bsmp-num pc-num"><i>₹</i><input inputmode="numeric" data-pc-k="' + k + '" value="' + (bk.items[k] ? bk.items[k].toLocaleString('en-IN') : '') + '" placeholder="0" aria-label="' + label + '"></span></label>';
+    const show = ROWS.filter(([k]) => ['ex', 'rto', 'ins'].includes(k) || bk.items[k] > 0);
+    const disc = '<label class="pc-row' + or('cash') + '"><span>Cash / Consumer Discount' + (bk.orange.has('cash') ? '<small>Please check this on your quote</small>' : '') + '</span><span class="bsmp-num pc-num"><i>−₹</i><input inputmode="numeric" data-pc-d="cash" value="' + (bk.cash ? bk.cash.toLocaleString('en-IN') : '') + '" placeholder="0" aria-label="Cash discount"></span></label>'
+      + (bk.exch ? '<label class="pc-row"><span>Exchange / Scrappage Bonus</span><span class="bsmp-num pc-num"><i>−₹</i><input inputmode="numeric" data-pc-d="exch" value="' + bk.exch.toLocaleString('en-IN') + '" aria-label="Exchange bonus"></span></label>' : '');
+    return '<div class="bsmp-page">' + head('Price Breakup') + '<div class="pc-body">'
+      + '<div class="pc-car">' + thumbBtn() + '<div><b class="' + (bk.orange.has('variant') ? 'pc-orange-t' : '') + '">' + esc(carLine()) + '</b><span>' + esc(cat.cities[bk.cityId].name) + '</span>' + (bk.orange.has('variant') ? '<small class="pc-orange-t">Please check the variant on your quote</small>' : '') + '</div></div>'
+      + (st.need.length ? '<div class="pc-needbox"><p>Your quote shows only the on-road price. Add ex-showroom, RTO and insurance from the quote, or use CarWale prices.</p><button type="button" class="bsmp-btn ghost block" data-pc="cwPrices">Use CarWale prices for ' + esc(v ? v.name : 'this variant') + '</button></div>' : '')
+      + '<div class="pc-rows">' + show.map(([k, , l]) => row(k, l)).join('') + disc
+      + '<label class="pc-row total' + or('total') + '"><span>Final On-Road Price' + (bk.orange.has('total') ? '<small>Please check this on your quote</small>' : '') + '</span><span class="bsmp-num pc-num"><i>₹</i><input inputmode="numeric" data-pc-total value="' + (bk.total ? bk.total.toLocaleString('en-IN') : '') + '" aria-label="Final on-road price"></span></label></div>'
+      + (st.typo ? '<p class="bsmp-errline">One amount looks off against the total. Check it on your quote.</p>' : '')
+      + '</div><div class="bsmp-foot"><button class="bsmp-btn red block" type="button" data-pc="compare" ' + (st.ok ? '' : 'disabled') + '>Compare with Market Rate</button></div></div>';
+  }
+  function viewSet2() {
+    const q = pc.q2[pc.q2i], k = pc.q2i + 1, n = pc.q2.length;
+    return '<div class="bsmp-page">' + head('A Few More Questions') + '<div class="pc-body"><p class="pc-lead">Help other buyers see real prices. Answers stay anonymous.</p>'
+      + '<div class="pc-prog" aria-hidden="true"><i style="width:' + Math.round((k - 1) / n * 100) + '%"></i></div><p class="pc-count">Question ' + k + ' of ' + n + '</p>'
+      + '<div class="pc-card"><h2>' + esc(q.text) + '</h2>' + optionList(q, pc.sel, 'q2') + '</div></div>'
+      + '<div class="bsmp-foot"><button class="bsmp-btn red block" type="button" data-pc="next2" ' + (answered(q) ? '' : 'disabled') + '>' + (k >= n ? 'See the Verdict' : 'Next') + '</button>'
+      + '<button class="pc-skip" type="button" data-pc="skip2">Skip and see the verdict</button></div></div>';
+  }
+  function viewLoader() {
+    return '<div class="bsmp-page">' + head('Market Rate') + '<div class="pc-body"><div class="pc-analyse">' + thumbBtn('big') + '<h2>Comparing with the market rate</h2><ul class="bsmp-steps">'
+      + ['Checking fixed charges for ' + cat.cities[pc.bk.cityId].name, 'Looking at add-ons and offers', 'Writing your result'].map(t => '<li><span class="bsmp-spin" style="width:14px;height:14px;border-width:2px"></span>' + esc(t) + '</li>').join('') + '</ul></div></div></div>';
+  }
+  function gauge(signal) {
+    const cx = 110, cy = 100, R = 78, a0 = 140, sweep = 260, pt = (f, r) => { const a = (a0 + sweep * f) * Math.PI / 180; return [cx + r * Math.cos(a), cy + r * Math.sin(a)]; };
+    const arc = (f1, f2, col) => { const [x1, y1] = pt(f1, R), [x2, y2] = pt(f2, R), large = (f2 - f1) * sweep > 180 ? 1 : 0; return '<path d="M' + x1.toFixed(1) + ' ' + y1.toFixed(1) + ' A' + R + ' ' + R + ' 0 ' + large + ' 1 ' + x2.toFixed(1) + ' ' + y2.toFixed(1) + '" stroke="' + col + '" stroke-width="16" fill="none"/>'; };
+    const mid = { lower: 0.1, good: 0.35, close: 0.65, room: 0.9 }[signal], [nx, ny] = pt(mid, R - 26);
+    return '<svg class="pc-gauge" viewBox="0 0 220 175" role="img" aria-label="' + esc(SIGNAL[signal][0]) + '">' + arc(0.003, 0.197, '#0979B6') + arc(0.203, 0.497, '#009488') + arc(0.503, 0.797, '#D77904') + arc(0.803, 0.997, '#E8735C')
+      + '<line x1="' + cx + '" y1="' + cy + '" x2="' + nx.toFixed(1) + '" y2="' + ny.toFixed(1) + '" stroke="currentColor" stroke-width="4" stroke-linecap="round"/><circle cx="' + cx + '" cy="' + cy + '" r="7" fill="currentColor"/></svg>';
+  }
+  const md = t => esc(t).replace(/\*\*([^*]+)\*\*/g, '<b>$1</b>');
+  function viewVerdict() {
+    const r = pc.r, sg = SIGNAL[r.signal], left = pc.q2.find(q => !pc.ans2[q.id]);
+    return '<div class="bsmp-page">' + head('Market Rate') + '<div class="pc-body">'
+      + '<div class="pc-car">' + thumbBtn() + '<div><b>' + esc(carLine()) + '</b><span>' + esc(cat.cities[pc.bk.cityId].name) + ' · Your quote ' + rsI(pc.bk.total) + '</span></div></div>'
+      + '<div class="pc-verdict">' + gauge(r.signal) + '<p class="pc-label" style="color:' + sg[1] + '">' + esc(sg[0]) + '</p></div>'
+      + '<div class="pc-note"><h3>What we found in your quote</h3><p>' + md(pc.note.explanation) + '</p><h3>Recommended</h3><p>' + md(pc.note.recommendation) + '</p></div>'
+      + (left ? '<div class="pc-card pc-left"><h2>' + esc(left.text) + '</h2>' + optionList(left, pc.sel, 'left') + '<button class="bsmp-btn teal block" type="button" data-pc="leftSave" ' + (answered(left) ? '' : 'disabled') + '>Submit</button></div>' : '')
+      + (pc.leftThanks ? '<p class="pc-thanks">' + ICON.check + ' Thanks, that helps other buyers.</p>' : '')
+      + '<button class="bsmp-btn teal block" type="button" data-pc="tips">Get New Car Buying Tips</button>'
+      + '<label class="bsmp-btn ghost block" style="margin-top:10px"><input type="file" accept="image/*,application/pdf" data-pc-file hidden>Check Another Quote</label>'
+      + '</div></div>';
+  }
+  function viewQuote() {
+    const v = document.createElement('div'); v.className = 'pc-full'; v.setAttribute('role', 'dialog'); v.setAttribute('aria-label', 'Your quote');
+    v.innerHTML = (pc.images || []).map(i => '<img src="' + i.dataUrl + '" alt="Your quote">').join('') + '<p>Tap to close</p>';
+    v.addEventListener('click', () => v.remove()); pcEl.appendChild(v); log('quote_preview_open', pc.step);
+  }
+
+  // ---------- events ----------
+  function onClick(e) {
+    const opt = e.target.closest('[data-pc-opt]');
+    if (opt) {
+      const q = opt.dataset.q === 'q1' ? pc.cur : opt.dataset.q === 'q2' ? pc.q2[pc.q2i] : pc.q2.find(x => !pc.ans2[x.id]);
+      const v = opt.dataset.pcOpt;
+      if (q.card === 'multi') { const cur = Array.isArray(pc.sel) ? pc.sel.slice() : []; pc.sel = v === 'not_sure' ? ['not_sure'] : cur.filter(x => x !== 'not_sure').includes(v) ? cur.filter(x => x !== v) : cur.filter(x => x !== 'not_sure').concat(v); }
+      else pc.sel = v;
+      if (v !== 'other') pc.other = '';
+      const keep = pcEl.querySelector('.pc-body') && pcEl.querySelector('.pc-body').scrollTop; pcRender(); const b = pcEl.querySelector('.pc-body'); if (b && keep) b.scrollTop = keep;
+      const f = pcEl.querySelector('.pc-other,[data-pc-amt]'); if (f && (v === 'other' || (q.options.find(o => String(o.value) === v) || {}).amount)) f.focus();
+      return;
+    }
+    const a = e.target.closest('[data-pc]'); if (!a) return;
+    const act = a.dataset.pc;
+    if (act === 'close') return closeCheck();
+    if (act === 'viewQuote') return viewQuote();
+    if (act === 'retry') { const f = pc.file, src = pc.source; return openCheck(f, { source: src }); }
+    if (act === 'next1') { const q = pc.cur, v = pc.sel, o = pc.other; pc.scrollTop0 = true; return answer1(q, v, o); }
+    if (act === 'cwPrices') return useCarWalePrices();
+    if (act === 'compare') {
+      log('record ' + pc.id, 'compared, trust ' + trust().score.toFixed(2)); buildSet2(); pc.sel = null; pc.other = ''; pc.amt = 0;
+      if (!pc.q2.length) return runVerdict(pc.id);
+      pc.step = 'set2'; pc.scrollTop0 = true; return pcRender();
+    }
+    if (act === 'next2') {
+      const q = pc.q2[pc.q2i]; answer2(q, pc.sel, pc.amt, pc.other); pc.sel = null; pc.other = ''; pc.amt = 0; pc.q2i++;
+      if (pc.q2i >= pc.q2.length) return runVerdict(pc.id);
+      pc.scrollTop0 = true; return pcRender();
+    }
+    if (act === 'skip2') { log('set2_skip', 'at question ' + (pc.q2i + 1) + ' of ' + pc.q2.length); pc.sel = null; return runVerdict(pc.id); }
+    if (act === 'leftSave') {
+      const q = pc.q2.find(x => !pc.ans2[x.id]); answer2(q, pc.sel, pc.amt, pc.other); pc.sel = null; pc.other = ''; pc.amt = 0; pc.leftThanks = true;
+      const before = pc.r.signal; pc.r = computeVerdict();
+      if (pc.r.signal !== before) return runVerdict(pc.id);
+      return pcRender();
+    }
+    if (act === 'tips') { log('tips_cta', ''); return app.snack('Opens the buying tips flow (not part of this prototype)'); }
+  }
+  function onInput(e) {
+    const t = e.target;
+    if (t.matches('[data-pc-other]')) { pc.other = t.value; const b = pcEl.querySelector('[data-pc="next1"],[data-pc="next2"],[data-pc="leftSave"]'); if (b) b.disabled = !String(pc.other).trim(); return; }
+    if (t.matches('[data-pc-amt]')) { BS.groupInput(t, 8); pc.amt = numv(t.value); return; }
+    if (t.matches('[data-pc-k],[data-pc-d],[data-pc-total]')) {
+      BS.groupInput(t, 9); const v = numv(t.value);
+      if (t.dataset.pcK) pc.bk.items[t.dataset.pcK] = v; else if (t.dataset.pcD) pc.bk[t.dataset.pcD] = v; else pc.bk.total = v;
+      if (!pc.reviewed) { pc.reviewed = true; log('breakup_edit', 'reviewed bonus'); }
+      const st = breakupState(), b = pcEl.querySelector('[data-pc="compare"]'); if (b) b.disabled = !st.ok;
+    }
+  }
+  function onChange(e) {
+    const t = e.target;
+    if (t.matches('[data-pc-file]')) { const f = t.files && t.files[0]; if (f) openCheck(f, { source: pc ? pc.source : 'pic' }); return; }
+    if (t.matches('[data-pc-k],[data-pc-d],[data-pc-total]')) { const y = pcEl.querySelector('.pc-body').scrollTop; pcRender(); pcEl.querySelector('.pc-body').scrollTop = y; }
+  }
+
+  // PIC widget upload (and the reminder deep link) opens the popup instead of the old in-page flow
+  $('#widgetWrap').addEventListener('change', e => {
+    const t = e.target; if (!t.matches || !t.matches('[data-upload]')) return;
+    e.stopPropagation();
+    const f = t.files && t.files[0]; t.value = '';
+    if (f) { log('pic_entry_tap', 'upload'); openCheck(f, { source: 'pic' }); }
+  }, true);
 
   resetWa();
 })();
