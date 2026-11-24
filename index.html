@@ -100,6 +100,14 @@ button{font:inherit;color:inherit}
 :root[data-theme="dark"] .wa-notice{background:#12302D;border-color:#2E5450}:root[data-theme="dark"] .wa-notice a{color:#5CC8BD}
 .pfield{display:flex;flex-direction:column;gap:4px;font-size:12px;font-weight:700;color:var(--hint)}
 .pfield input{font:inherit;font-size:15px;font-weight:400;padding:9px 10px;min-height:42px;border:1px solid var(--line);border-radius:8px;background:transparent;color:var(--ink)}
+.pq-back{position:absolute;inset:0;z-index:80;background:rgba(0,0,0,.5);display:flex;align-items:flex-end}
+.pq{width:100%;background:var(--page);color:var(--ink);border-radius:20px 20px 0 0;border-top:3px dashed var(--proto);padding:18px 16px calc(18px + env(safe-area-inset-bottom,0px));display:flex;flex-direction:column;gap:10px}
+.pq b{font-size:16px}
+.pq p{margin:0;font-size:13px;line-height:1.5;color:var(--ink2)}
+.pq input{font:inherit;font-size:16px;padding:10px 12px;min-height:46px;border:1px solid var(--line);border-radius:8px;background:transparent;color:var(--ink)}
+.pq .go{min-height:46px;border:0;border-radius:8px;background:#25D366;color:#FFFFFF;font-weight:700;font-size:15px;cursor:pointer}
+.pq .go:disabled{opacity:.5;cursor:default}
+.pq .lnk{min-height:40px;border:0;background:none;color:var(--proto);font-weight:700;font-size:13px;cursor:pointer}
 .landing-tag{display:none;margin:10px 16px 0;padding:9px 12px;border-radius:8px;background:var(--proto-t);color:var(--proto);font-size:12.5px;line-height:1.45}
 .landing-tag.on{display:block}
 .bsmp-upload.flash{animation:flash 1.4s ease-in-out 2}
@@ -190,7 +198,7 @@ button{font:inherit;color:inherit}
     </div>
     <h2>WhatsApp number the button opens</h2>
     <label class="pfield">With country code<input id="waNum" inputmode="tel" autocomplete="off" placeholder="e.g. 9198XXXXXXXX"></label>
-    <p class="note">Put CarWale's WhatsApp business number here, or your own number to land in "Message yourself". Left empty, WhatsApp asks you to pick a chat. Kept on this phone only.</p>
+    <p class="note">Put CarWale's WhatsApp business number here, or your own number to land in "Message yourself". Left empty, the button asks for a number first. Kept on this phone only. You can also add ?wa=91XXXXXXXXXX to the page link.</p>
     <h2>Events</h2>
     <ul class="log" id="log"><li class="empty">Nothing yet.</li></ul>
     <p class="note">The WhatsApp screens are a look-alike. Swift Mumbai prices are from carwale.com (23 Nov 2026): the LXi breakup is exact, other ex-showroom prices are rounded to Rs. 1,000. Dealer names are from the same page. Without a model, uploads use a sample Swift ZXi reading.</p>
@@ -2160,10 +2168,31 @@ Never use: should, must, guarantee, guaranteed, scam, cheat, rip-off, overcharge
   // ---------- real WhatsApp: wa.me link with the opt-in message typed ----------
   const numEl = $('#waNum');
   try { numEl.value = localStorage.getItem('bsmpWaNum') || ''; } catch (e) { /* storage unavailable */ }
+  try { const qn = new URLSearchParams(location.search).get('wa'); if (qn) { numEl.value = qn; localStorage.setItem('bsmpWaNum', qn); } } catch (e) { /* no query or storage */ }
+  function askNumber(source) {
+    const back = document.createElement('div'); back.className = 'pq-back';
+    back.innerHTML = '<div class="pq" role="dialog" aria-modal="true" aria-label="Which WhatsApp chat should this open?"><b>Which WhatsApp chat should this open?</b>'
+      + '<p>Prototype only. In the live product this is CarWale\u2019s WhatsApp business number. Enter your own number to test in \u201cMessage yourself\u201d.</p>'
+      + '<input id="pqNum" type="tel" inputmode="tel" autocomplete="tel" placeholder="10-digit mobile number" aria-label="WhatsApp number">'
+      + '<button type="button" class="go" id="pqGo" disabled>Open WhatsApp</button><button type="button" class="lnk" id="pqAny">Pick a chat in WhatsApp instead</button></div>';
+    screenEl.appendChild(back);
+    const inp = back.querySelector('#pqNum'), go = back.querySelector('#pqGo');
+    const valid = () => { let dg = inp.value.replace(/\D/g, ''); if (dg.length === 10) dg = '91' + dg; return dg.length >= 11 && dg.length <= 15; };
+    inp.addEventListener('input', () => { go.disabled = !valid(); });
+    go.addEventListener('click', () => {
+      numEl.value = inp.value.trim();
+      try { localStorage.setItem('bsmpWaNum', numEl.value); } catch (e) { /* storage unavailable */ }
+      back.remove(); openRealWhatsApp(source);
+    });
+    back.querySelector('#pqAny').addEventListener('click', () => { back.remove(); openRealWhatsApp(source, true); });
+    back.addEventListener('click', e => { if (e.target === back) back.remove(); });
+    inp.focus();
+  }
   numEl.addEventListener('change', () => { try { localStorage.setItem('bsmpWaNum', numEl.value.trim()); } catch (e) { /* storage unavailable */ } });
   function waNumber() { let dg = (numEl.value || '').replace(/\D/g, ''); if (dg.length === 10) dg = '91' + dg; return dg.length >= 11 ? dg : ''; }
   function waUrl() { return 'https://wa.me/' + waNumber() + '?text=' + encodeURIComponent(optinText()); }
-  function openRealWhatsApp(source) {
+  function openRealWhatsApp(source, anyChat) {
+    if (!waNumber() && !anyChat) return askNumber(source);
     const url = waUrl();
     log('whatsapp_redirect', (waNumber() ? 'to +' + waNumber() : 'pick a chat') + ', ' + ref);
     let win = null;
