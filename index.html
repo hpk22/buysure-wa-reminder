@@ -110,7 +110,7 @@ button{font:inherit;color:inherit}
 .pq .lnk{min-height:40px;border:0;background:none;color:var(--proto);font-weight:700;font-size:13px;cursor:pointer}
 .landing-tag{display:none;margin:10px 16px 0;padding:9px 12px;border-radius:8px;background:var(--proto-t);color:var(--proto);font-size:12.5px;line-height:1.45}
 .landing-tag.on{display:block}
-.bsmp-upload.flash{animation:flash 1.4s ease-in-out 2}
+.bsmp-upload.flash,.var-card.flash{animation:flash 1.4s ease-in-out 2}
 @keyframes flash{50%{box-shadow:0 0 0 4px rgba(0,148,136,.35)}}
 @media (prefers-reduced-motion: reduce){.bsmp-upload.flash{animation:none;box-shadow:0 0 0 3px rgba(0,148,136,.35)}}
 
@@ -234,7 +234,7 @@ button{font:inherit;color:inherit}
                 </dl>
               </div>
             </div>
-            <div class="wa-notice" id="waNotice" hidden role="status"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="11" fill="#25D366"/><path fill="#fff" d="M16.6 14.2c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1-.2.2-.6.8-.8 1-.1.2-.3.2-.5.1-.7-.3-1.6-.8-2.4-1.6-.6-.6-1.1-1.3-1.2-1.6-.1-.2 0-.4.1-.5l.4-.5c.1-.2.2-.3.3-.5.1-.2 0-.4 0-.5l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5c-.2 0-.5.1-.7.3-.2.3-.9.9-.9 2.2s.9 2.5 1.1 2.7c.1.2 1.8 2.8 4.4 3.9 2.2.9 2.6.7 3.1.7s1.5-.6 1.7-1.2c.2-.6.2-1.1.1-1.2 0-.1-.2-.2-.4-.3z"/></svg><div><b id="waNoticeTitle">WhatsApp opened</b><span>Tap Send in WhatsApp to get your reminder. You'll pick 3 or 7 days there.</span><br><a id="waAgain" target="_blank" rel="noopener">Open WhatsApp again</a></div></div>
+            <div class="wa-notice" id="waNotice" hidden role="status"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="11" fill="#25D366"/><path fill="#fff" d="M16.6 14.2c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1-.2.2-.6.8-.8 1-.1.2-.3.2-.5.1-.7-.3-1.6-.8-2.4-1.6-.6-.6-1.1-1.3-1.2-1.6-.1-.2 0-.4.1-.5l.4-.5c.1-.2.2-.3.3-.5.1-.2 0-.4 0-.5l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5c-.2 0-.5.1-.7.3-.2.3-.9.9-.9 2.2s.9 2.5 1.1 2.7c.1.2 1.8 2.8 4.4 3.9 2.2.9 2.6.7 3.1.7s1.5-.6 1.7-1.2c.2-.6.2-1.1.1-1.2 0-.1-.2-.2-.4-.3z"/></svg><div><b id="waNoticeTitle">WhatsApp opened</b><span id="waNoticeText">Tap Send in WhatsApp to get your reminder. You'll pick 3 or 7 days there.</span><br><a id="waAgain" target="_blank" rel="noopener">Open WhatsApp again</a></div></div>
             <div class="widget-wrap" id="widgetWrap"><div id="bsmpRoot"></div></div>
             <div class="pic pic-rest">
               <h2>Other Swift variants</h2>
@@ -2064,7 +2064,26 @@ Never use: should, must, guarantee, guaranteed, scam, cheat, rip-off, overcharge
     msg('me', 'In ' + n + ' days');
     wa.plan = n === 3 ? [3, 7] : [7, 10];
     log('reminder_days', String(n));
-    return botSay('Done. We\'ll remind you on ' + dayLabel(wa.plan[0]) + '.', { foot: 'Reply STOP any time to stop reminders.' }).then(protoNext);
+    return botSay('Done. We\'ll remind you on ' + dayLabel(wa.plan[0]) + '.', { foot: 'Reply STOP any time to stop reminders.', buttons: [backBtn()] }).then(protoNext);
+  }
+  // Instant reply's URL button: /r/<ref> redirects to the same PIC page, variant and checker
+  function backBtn() { return { label: 'Back to ' + ctx.model + ' prices', url: true, run: backToPage }; }
+  function backToPage() {
+    const link = PIC_URL + '?utm_source=whatsapp&utm_medium=optin_reply&ref=' + ref + '#vid=26014&to=mpc';
+    log('back_to_page', ref);
+    showCw(); app.restart(); screenEl.classList.remove('flow');
+    setUrl(link, true);
+    const tag = $('#landingTag');
+    tag.textContent = 'Back from WhatsApp: carwale.com/r/' + ref + ' brought you to the same ' + ctx.model + ' page, variant and price checker.';
+    tag.classList.add('on');
+    $('#waNoticeTitle').textContent = 'Reminder set for ' + dayLabel(wa.plan ? wa.plan[0] : 3);
+    $('#waNoticeText').textContent = 'We\u2019ll message you on WhatsApp. When you get the dealer\u2019s quote, upload it here.';
+    $('#waAgain').hidden = true; $('#waNotice').hidden = false;
+    const card = document.querySelector('.var-card');
+    requestAnimationFrame(() => {
+      scroller.scrollTop = Math.max(0, card.offsetTop - 8);
+      card.classList.remove('flash'); void card.offsetWidth; card.classList.add('flash');
+    });
   }
   function protoNext() {
     protoBar.innerHTML = '';
@@ -2133,7 +2152,7 @@ Never use: should, must, guarantee, guaranteed, scam, cheat, rip-off, overcharge
     const link = PIC_URL + '?utm_source=whatsapp&utm_medium=reminder&utm_campaign=' + campaign + '&ref=' + ref + '#to=mpc&start=upload';
     log('reminder_click', campaign + ', upload');
     showCw(); app.restart(); screenEl.classList.remove('flow');
-    setUrl(link, true); $('#landingTag').classList.add('on');
+    setUrl(link, true); $('#landingTag').textContent = 'Opened from the WhatsApp reminder: the upload picker opens straight away.'; $('#landingTag').classList.add('on');
     const wrap = $('#widgetWrap'); scroller.scrollTop = Math.max(0, wrap.offsetTop - 8);
     const box = wrap.querySelector('.bsmp-upload'), input = wrap.querySelector('[data-upload]');
     if (box) { box.classList.remove('flash'); void box.offsetWidth; box.classList.add('flash'); }
@@ -2151,7 +2170,7 @@ Never use: should, must, guarantee, guaranteed, scam, cheat, rip-off, overcharge
     if (!wa.plan) {
       msg('bot', 'Sure. When should we remind you to check your ' + esc(ctx.model) + ' quote?\n\nYou can also send a photo of the quote here any time.');
       msg('me', 'In 3 days'); wa.plan = [3, 7];
-      msg('bot', 'Done. We\'ll remind you on ' + dayLabel(3) + '.', { foot: 'Reply STOP any time to stop reminders.' });
+      msg('bot', 'Done. We\'ll remind you on ' + dayLabel(3) + '.', { foot: 'Reply STOP any time to stop reminders.', buttons: [backBtn()] });
     }
   }
   panel.addEventListener('click', e => {
@@ -2201,7 +2220,8 @@ Never use: should, must, guarantee, guaranteed, scam, cheat, rip-off, overcharge
     try { win = window.open(url, '_blank'); } catch (e) { win = null; }
     if (win) { try { win.opener = null; } catch (e) { /* cross-origin */ } }
     const n = $('#waNotice'), again = $('#waAgain');
-    again.href = url;
+    again.href = url; again.hidden = false;
+    $('#waNoticeText').textContent = 'Tap Send in WhatsApp to get your reminder. You\u2019ll pick 3 or 7 days there.';
     $('#waNoticeTitle').textContent = win ? 'WhatsApp opened' : 'Open WhatsApp to set your reminder';
     again.textContent = win ? 'Open WhatsApp again' : 'Open WhatsApp';
     n.hidden = false;
